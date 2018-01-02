@@ -18,3 +18,7 @@ clear :
 clean : 
 	rm -rf protoc-gen-swiftgrpc Packages .build protoc-gen-swift Package.pins
 	rm -rf Package.resolved
+
+install:
+	brew tap grpc/grpc
+	brew install protobuf
