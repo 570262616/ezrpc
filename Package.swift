@@ -26,14 +26,14 @@ let package = Package(
             path: "Sources/ezrpc/"
         ),
         .target(
+            name: "TemplateEncoder",
+            dependencies: ["Stencil", "SwiftProtobuf", "SwiftProtobufPluginLibrary", "protoc-gen-swift"],
+            path: "Sources/TemplateEncoder"),
+        .target(
             name: "protoc-gen-swiftgrpc",
             dependencies: ["TemplateEncoder"],
             path: "Sources/protoc-gen-swiftgrpc"
         ),
-        .target(
-            name: "TemplateEncoder",
-            dependencies: ["Stencil", "SwiftProtobuf", "SwiftProtobufPluginLibrary", "protoc-gen-swift"],
-            path: "Sources/TemplateEncoder"),
         .testTarget(
             name: "ezrpcTests",
             dependencies: ["ezrpc"]),
