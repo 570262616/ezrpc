@@ -6,9 +6,14 @@
 
         let api = "{{ .|path:file,service,method }}"
         
-        debugEngine?.debugData.append("-------------Start-------------------" as AnyObject)
-        debugEngine?.debugData.append("api: " + "\(api)" as AnyObject)
-        debugEngine?.debugData.append("metadata: \n" + grpcEngine.grpcClient.metadata.description as AnyObject)
+        var debugObject: DebugObject? = nil
+        if debugEngine != nil {
+            debugObject = DebugObject(identifier: api)
+        }
+
+        debugObject?.content.append("-------------Start-------------------" as AnyObject)
+        debugObject?.content.append("api: " + "\(api)" as AnyObject)
+        debugObject?.content.append("metadata: \n" + grpcEngine.grpcClient.metadata.description as AnyObject)
 
         let result = grpcEngine.grpcClient.needLimit(api: api)
         guard !result.0 else {
@@ -24,8 +29,8 @@
             let call = grpcEngine.grpcClient.channel.makeCall(api)
             
             debugPrint(api, "req:", request)
-            debugEngine?.debugData.append("req: " as AnyObject)
-            debugEngine?.debugData.append(request as AnyObject)
+            debugObject?.content.append("req: " as AnyObject)
+            debugObject?.content.append(request as AnyObject)
             
             try call.ezPerform(message: requestData, metadata: requestMetadata) { (callResult) in
                 
@@ -34,17 +39,19 @@
                         completion(response)
                     }
                     debugPrint(api, "resp:", response)
-                    debugEngine?.debugData.append("resp:" as AnyObject)
-                    debugEngine?.debugData.append(response as AnyObject)
-                    debugEngine?.debugData.append("-------------End-------------------" as AnyObject)
+                    debugObject?.content.append("resp:" as AnyObject)
+                    debugObject?.content.append(response as AnyObject)
+                    debugObject?.content.append("-------------End-------------------" as AnyObject)
+                    debugEngine?.debugData.append(debugObject)
                 } else {
                     let error = GRPCError(errorCode: callResult.statusCode, errorUserInfo: [NSLocalizedDescriptionKey: callResult.statusMessage ?? ""])
                     DispatchQueue.main.async {
                         failure(error)
                     }
                     debugPrint(api, "error:", error)
-                    debugEngine?.debugData.append("error: " + "\(error)" as AnyObject)
-                    debugEngine?.debugData.append("-------------End-------------------" as AnyObject)
+                    debugObject?.content.append("error: " + "\(error)" as AnyObject)
+                    debugObject?.content.append("-------------End-------------------" as AnyObject)
+                    debugEngine?.debugData.append(debugObject)
                 }
             }
         } catch let error {
@@ -52,7 +59,8 @@
                 failure(error)
             }
             debugPrint(api, "error:", error)
-            debugEngine?.debugData.append("error: " + "\(error)" as AnyObject)
-            debugEngine?.debugData.append("-------------End-------------------" as AnyObject)
+            debugObject?.content.append("error: " + "\(error)" as AnyObject)
+            debugObject?.content.append("-------------End-------------------" as AnyObject)
+            debugEngine?.debugData.append(debugObject)
         }
     }
