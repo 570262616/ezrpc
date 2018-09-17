@@ -44,10 +44,11 @@
                     debugObject?.content.append("-------------End-------------------" as AnyObject)
                     debugEngine?.debugData.append(debugObject)
                 } else {
-                    let error = GRPCError(errorCode: callResult.statusCode, errorUserInfo: [NSLocalizedDescriptionKey: callResult.statusMessage ?? ""])
                     DispatchQueue.main.async {
+                        let error = GRPCError(errorCode: -10000, errorUserInfo: [NSLocalizedDescriptionKey : "Opps, something is wrong. Please try again later or contact our customer service officer to assist you.".localized() ])
                         failure(error)
                     }
+                    let error = GRPCError(errorCode: callResult.statusCode, errorUserInfo: [NSLocalizedDescriptionKey: callResult.statusMessage ?? ""])
                     debugPrint(api, "error:", error)
                     debugObject?.content.append("error: " + "\(error)" as AnyObject)
                     debugObject?.content.append("-------------End-------------------" as AnyObject)
@@ -55,7 +56,9 @@
                 }
             }
         } catch let error {
+            
             DispatchQueue.main.async {
+                let error = GRPCError(errorCode: -10000, errorUserInfo: [NSLocalizedDescriptionKey : "Opps, something is wrong. Please try again later or contact our customer service officer to assist you.".localized() ])
                 failure(error)
             }
             debugPrint(api, "error:", error)
