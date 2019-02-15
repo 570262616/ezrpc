@@ -35,35 +35,39 @@
             try call.ezPerform(message: requestData, metadata: requestMetadata) { (callResult) in
                 
                 if let responseData = callResult.resultData, let response = try? {{ method|output }}(serializedData:responseData) {
-                    DispatchQueue.main.async {
-                        completion(response)
-                    }
+                    
                     debugPrint(api, "resp:", response)
                     debugObject?.content.append("resp:" as AnyObject)
                     debugObject?.content.append(response as AnyObject)
                     debugObject?.content.append("-------------End-------------------" as AnyObject)
                     debugEngine?.debugData.append(debugObject)
-                } else {
+
                     DispatchQueue.main.async {
-                        let error = GRPCError(errorCode: -10000, errorUserInfo: [NSLocalizedDescriptionKey : "Opps, something is wrong. Please try again later or contact our customer service officer to assist you.".localized() ])
-                        failure(error)
+                        completion(response)
                     }
+                } else {
                     let error = GRPCError(errorCode: callResult.statusCode, errorUserInfo: [NSLocalizedDescriptionKey: callResult.statusMessage ?? ""])
                     debugPrint(api, "error:", error)
                     debugObject?.content.append("error: " + "\(error)" as AnyObject)
                     debugObject?.content.append("-------------End-------------------" as AnyObject)
                     debugEngine?.debugData.append(debugObject)
+
+                    DispatchQueue.main.async {
+                        let error = GRPCError(errorCode: -10000, errorUserInfo: [NSLocalizedDescriptionKey : "Opps, something is wrong. Please try again later or contact our customer service officer to assist you.".localized() ])
+                        failure(error)
+                    }
                 }
             }
         } catch let error {
             
-            DispatchQueue.main.async {
-                let error = GRPCError(errorCode: -10000, errorUserInfo: [NSLocalizedDescriptionKey : "Opps, something is wrong. Please try again later or contact our customer service officer to assist you.".localized() ])
-                failure(error)
-            }
             debugPrint(api, "error:", error)
             debugObject?.content.append("error: " + "\(error)" as AnyObject)
             debugObject?.content.append("-------------End-------------------" as AnyObject)
             debugEngine?.debugData.append(debugObject)
+
+            DispatchQueue.main.async {
+                let error = GRPCError(errorCode: -10000, errorUserInfo: [NSLocalizedDescriptionKey : "Opps, something is wrong. Please try again later or contact our customer service officer to assist you.".localized() ])
+                failure(error)
+            }
         }
     }
