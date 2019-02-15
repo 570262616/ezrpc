@@ -26,7 +26,10 @@ debugPrint("protoPath = \(protoPath)")
 
 var pathComponents = protoPath.components(separatedBy: "/")
 
-var searchPath: String = ""
+var iComponents = i.components(separatedBy: "/")
+iComponents.removeLast()
+let defaultSearchPath = iComponents.joined(separator: "/")
+var searchPath: String = " -I \(defaultSearchPath)"
 for _ in 0..<min(pathComponents.count, 3) {
     searchPath = searchPath + " -I \(pathComponents.joined(separator: "/")) "
     pathComponents.removeLast()
