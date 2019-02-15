@@ -157,13 +157,13 @@ func main() throws {
         clientfile.content = stripMarkers(clientcode)
         response.file.append(clientfile)
 
-        let serverFileName = uniqueOutputFileName(component:"server", fileDescriptor:fileDescriptor)
-        let servercode = try templateEnvironment.renderTemplate(name:"server.pb.swift",
-                                                                context: context)
-        var serverfile = Google_Protobuf_Compiler_CodeGeneratorResponse.File()
-        serverfile.name = serverFileName
-        serverfile.content = stripMarkers(servercode)
-        response.file.append(serverfile)
+//        let serverFileName = uniqueOutputFileName(component:"server", fileDescriptor:fileDescriptor)
+//        let servercode = try templateEnvironment.renderTemplate(name:"server.pb.swift",
+//                                                                context: context)
+//        var serverfile = Google_Protobuf_Compiler_CodeGeneratorResponse.File()
+//        serverfile.name = serverFileName
+//        serverfile.content = stripMarkers(servercode)
+//        response.file.append(serverfile)
 
       } catch (let error) {
         Log("ERROR \(error)")
