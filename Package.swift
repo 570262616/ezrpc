@@ -14,7 +14,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/jatoben/CommandLine", from: "3.0.0-pre1"),
         .package(url: "https://github.com/kareman/SwiftShell", from: "4.0.0"),
-        .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.0.2"),
+        .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.3.1"),
         .package(url: "https://github.com/kylef/Stencil.git", from: "0.9.0"),
     ],
     targets: [

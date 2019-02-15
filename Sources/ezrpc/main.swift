@@ -21,11 +21,28 @@ guard let i = inputOption.value, let o = outputOption.value else {
     exit(EX_USAGE)
 }
 
-let command = runAsync("protoc", i, "--proto_path=../apidoc/proto/", "--plugin=./protoc-gen-swiftgrpc", "--plugin=./protoc-gen-swift", "--swift_opt=Visibility=Public", "--swiftgrpc_out=\(o)", "--swift_out=\(o)")
+let protoPath = run(bash: "cd $(dirname \(i)); pwd").stdout
+debugPrint("protoPath = \(protoPath)")
 
-do {
-    try command.finish()
-} catch CommandError.returnedErrorCode(let error) {
-    print(error)
-    exit(EX_USAGE)
+var pathComponents = protoPath.components(separatedBy: "/")
+
+var searchPath: String = ""
+for _ in 0..<min(pathComponents.count, 3) {
+    searchPath = searchPath + " -I \(pathComponents.joined(separator: "/")) "
+    pathComponents.removeLast()
 }
+let bashCommand = "protoc\(searchPath)--plugin=./protoc-gen-swiftgrpc --plugin=./protoc-gen-swift --swift_opt=Visibility=Public --swiftgrpc_out=\(o) --swift_out=\(o) \(i)"
+
+debugPrint("command = \(bashCommand)")
+
+//let command = run(bash: bashCommand)
+
+let command = run(bash: bashCommand)
+
+//do {
+//    try command.finish()
+//} catch CommandError.returnedErrorCode(let error) {
+//    print(error)
+//    exit(EX_USAGE)
+//}
+//print(command.stderror)
