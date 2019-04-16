@@ -1,8 +1,8 @@
 import Foundation
-import CommandLineKit
+import CommandLine
 import SwiftShell
 
-let cli = CommandLineKit.CommandLine()
+let cli = CommandLine()
 
 let inputOption = StringOption(shortFlag: "i", longFlag: "input", required: true, helpMessage: "proto file path")
 

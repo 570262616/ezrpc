@@ -28,8 +28,8 @@ extension String {
     }
     
     var uppercasedFirst : String {
-        var out = self.characters
-        if let first = out.popFirst() {
+        let out = self
+        if let first = out.first {
             return String(first).uppercased() + String(out)
         } else {
             return self
