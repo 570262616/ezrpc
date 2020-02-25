@@ -16,35 +16,13 @@
 import Foundation
 import SwiftProtobuf
 import SwiftProtobufPluginLibrary
-import Stencil
-import PathKit
 
-func Log(_ message : String) {
-  FileHandle.standardError.write((message + "\n").data(using:.utf8)!)
-}
-
-// Code templates use "//-" prefixes to comment-out template operators
-// to keep them from interfering with Swift code formatting tools.
-// Use this to remove them after templates have been expanded.
-func stripMarkers(_ code:String) -> String {
-  let inputLines = code.components(separatedBy:"\n")
-
-  var outputLines : [String] = []
-  for line in inputLines {
-    if line.contains("//-") {
-      let removed = line.replacingOccurrences(of:"//-", with:"")
-      if (removed.trimmingCharacters(in:CharacterSet.whitespaces) != "") {
-        outputLines.append(removed)
-      }
-    } else {
-      outputLines.append(line)
-    }
-  }
-  return outputLines.joined(separator:"\n")
+func Log(_ message: String) {
+  FileHandle.standardError.write((message + "\n").data(using: .utf8)!)
 }
 
 // from apple/swift-protobuf/Sources/protoc-gen-swift/StringUtils.swift
-func splitPath(pathname: String) -> (dir:String, base:String, suffix:String) {
+func splitPath(pathname: String) -> (dir: String, base: String, suffix: String) {
   var dir = ""
   var base = ""
   var suffix = ""
@@ -77,18 +55,16 @@ func splitPath(pathname: String) -> (dir:String, base:String, suffix:String) {
   return (dir: dir, base: base, suffix: suffix)
 }
 
-enum OutputNaming : String {
+enum FileNaming: String {
   case FullPath
   case PathToUnderscores
   case DropPath
 }
 
-var outputNamingOption : OutputNaming = .FullPath // temporarily hard-coded
-
-func outputFileName(component: String, fileDescriptor: FileDescriptor) -> String {
-  let ext = "." + component + ".pb.swift"
+func outputFileName(component: String, fileDescriptor: FileDescriptor, fileNamingOption: FileNaming) -> String {
+  let ext = "." + component + ".swift"
   let pathParts = splitPath(pathname: fileDescriptor.name)
-  switch outputNamingOption {
+  switch fileNamingOption {
   case .FullPath:
     return pathParts.dir + pathParts.base + ext
   case .PathToUnderscores:
@@ -100,13 +76,13 @@ func outputFileName(component: String, fileDescriptor: FileDescriptor) -> String
   }
 }
 
-var generatedFiles : [String:Int] = [:]
+var generatedFiles: [String: Int] = [:]
 
-func uniqueOutputFileName(component: String, fileDescriptor: FileDescriptor) -> String {
-  let defaultName = outputFileName(component:component, fileDescriptor:fileDescriptor)
+func uniqueOutputFileName(component: String, fileDescriptor: FileDescriptor, fileNamingOption: FileNaming) -> String {
+  let defaultName = outputFileName(component: component, fileDescriptor: fileDescriptor, fileNamingOption: fileNamingOption)
   if let count = generatedFiles[defaultName] {
     generatedFiles[defaultName] = count + 1
-    return outputFileName(component:  "\(count)." + component, fileDescriptor: fileDescriptor )
+    return outputFileName(component: "\(count)." + component, fileDescriptor: fileDescriptor, fileNamingOption: fileNamingOption)
   } else {
     generatedFiles[defaultName] = 1
     return defaultName
@@ -115,17 +91,13 @@ func uniqueOutputFileName(component: String, fileDescriptor: FileDescriptor) -> 
 
 func main() throws {
 
-  // initialize template engine and add custom filters
-  let templateEnvironment = Environment(loader: InternalLoader(),
-                                        extensions:[GRPCFilterExtension()])
-
   // initialize responses
   var response = Google_Protobuf_Compiler_CodeGeneratorResponse()
 
   // read plugin input
   let rawRequest = try Stdin.readall()
   let request = try Google_Protobuf_Compiler_CodeGeneratorRequest(serializedData: rawRequest)
-  
+
   let options = try GeneratorOptions(parameter: request.parameter)
 
   // Build the SwiftProtobufPluginLibrary model of the plugin input
@@ -133,41 +105,13 @@ func main() throws {
 
   // process each .proto file separately
   for fileDescriptor in descriptorSet.files {
-
     if fileDescriptor.services.count > 0 {
-      // a package declaration is required for file containing service(s)
-      let package = fileDescriptor.package
-      guard package != ""  else {
-        print("ERROR: no package for \(fileDescriptor.name)")
-        continue
-      }
-      
-      // generate separate implementation files for client and server
-      let context : [String:Any] = [
-        "file": fileDescriptor,
-        "access": options.visibility.sourceSnippet]
-
-      do {
-
-        let clientFileName = uniqueOutputFileName(component:"client", fileDescriptor:fileDescriptor)
-        let clientcode = try templateEnvironment.renderTemplate(name:"client.pb.swift",
-                                                                context: context)
-        var clientfile = Google_Protobuf_Compiler_CodeGeneratorResponse.File()
-        clientfile.name = clientFileName
-        clientfile.content = stripMarkers(clientcode)
-        response.file.append(clientfile)
-
-        let serverFileName = uniqueOutputFileName(component:"server", fileDescriptor:fileDescriptor)
-        let servercode = try templateEnvironment.renderTemplate(name:"server.pb.swift",
-                                                                context: context)
-        var serverfile = Google_Protobuf_Compiler_CodeGeneratorResponse.File()
-        serverfile.name = serverFileName
-        serverfile.content = stripMarkers(servercode)
-        response.file.append(serverfile)
-
-      } catch (let error) {
-        Log("ERROR \(error)")
-      }
+      let grpcFileName = uniqueOutputFileName(component: "grpc", fileDescriptor: fileDescriptor, fileNamingOption: options.fileNaming)
+      let grpcGenerator = Generator(fileDescriptor, options: options)
+      var grpcFile = Google_Protobuf_Compiler_CodeGeneratorResponse.File()
+      grpcFile.name = grpcFileName
+      grpcFile.content = grpcGenerator.code
+      response.file.append(grpcFile)
     }
   }
 
@@ -178,6 +122,6 @@ func main() throws {
 
 do {
   try main()
-} catch (let error) {
-  Log("ERROR: \(error)")	
+} catch {
+  Log("ERROR: \(error)")
 }
