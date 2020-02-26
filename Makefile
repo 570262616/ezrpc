@@ -20,8 +20,11 @@ build:
 	cp .build/release/protoc-gen-swiftgrpc ./Plugin
 
 
+#gen:
+#	protoc ./Example/echo.proto --proto_path=./Example/ --plugin=./Plugin/protoc-gen-swiftgrpc --plugin=./Plugin/protoc-gen-swift --grpc-swift_opt=Visibility=Public --swift_opt=Visibility=Public --grpc-swift_opt=Client=true,Server=false --grpc-swift_out=./Generated --swift_out=./Generated
+
 gen:
-	protoc ./Example/echo.proto --proto_path=./Example/ --plugin=./Plugin/protoc-gen-swiftgrpc --plugin=./Plugin/protoc-gen-swift --grpc-swift_opt=Visibility=Public --swift_opt=Visibility=Public --grpc-swift_opt=Client=true,Server=false --grpc-swift_out=./Generated --swift_out=./Generated
+	protoc ./Example/echo.proto --proto_path=./Example/ --plugin=./Plugin/protoc-gen-swiftgrpc --plugin=./Plugin/protoc-gen-swift --swiftgrpc_opt=Visibility=Public --swift_opt=Visibility=Public --swiftgrpc_opt=Client=true,Server=false --swiftgrpc_out=./Generated --swift_out=./Generated
 
 clear : 
 	rm -f ./Generated/*

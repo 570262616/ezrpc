@@ -106,7 +106,8 @@ class Generator {
     if options.generateClient {
       for service in file.services {
         self.service = service
-        printClient()
+        printEZBuyClient()
+//        printClient()
       }
     }
     println()

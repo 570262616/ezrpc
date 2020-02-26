@@ -33,18 +33,6 @@ public protocol GRAppService {
 }
 
 public final class GRAppServiceClient: GRPCClient, GRAppService {
-  public let connection: ClientConnection
-  public var defaultCallOptions: CallOptions
-
-  /// Creates a client for the spk.App service.
-  ///
-  /// - Parameters:
-  ///   - connection: `ClientConnection` to the service host.
-  ///   - defaultCallOptions: Options to use for each service call if the user doesn't provide them.
-  public init(connection: ClientConnection, defaultCallOptions: CallOptions = CallOptions()) {
-    self.connection = connection
-    self.defaultCallOptions = defaultCallOptions
-  }
 
   /// Asynchronous unary call to Search.
   ///
@@ -52,10 +40,21 @@ public final class GRAppServiceClient: GRPCClient, GRAppService {
   ///   - request: Request to send to Search.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func search(_ request: GRAppSearch, callOptions: CallOptions? = nil) -> UnaryCall<GRAppSearch, GRAppSearchResp> {
-    return self.makeUnaryCall(path: "/spk.App/Search",
+  @discardableResult
+  public static func search(_ request: GRAppSearch, completion: @escaping (GRAppSearchResp) -> Void, failure: @escaping (Error) -> Void) -> UnaryCall<GRAppSearch, GRAppSearchResp> {
+    let client = GRAppServiceClient(connection: grpcEngine.makeClientConnection(), defaultCallOptions: grpcEngine.makeOptions())
+    let call = client.makeUnaryCall(path: "/spk.App/Search",
                               request: request,
                               callOptions: callOptions ?? self.defaultCallOptions)
+    call.response.whenComplete { (result) in
+       switch result {
+           case .success(let resp):
+               completion(resp)
+           case .failure(let error):
+               failure(error)
+       }
+    }
+    return call
   }
 
 }
