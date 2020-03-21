@@ -27,35 +27,41 @@ import NIOHTTP1
 import SwiftProtobuf
 
 
-/// Usage: instantiate GRAppServiceClient, then call methods of this protocol to make API calls.
-public protocol GRAppService {
+/// Usage: instantiate GRAppClient, then call methods of this protocol to make API calls.
+public protocol GRAppClientProtocol {
   func search(_ request: GRAppSearch, callOptions: CallOptions?) -> UnaryCall<GRAppSearch, GRAppSearchResp>
 }
 
-public final class GRAppServiceClient: GRPCClient, GRAppService {
+public final class GRAppClient: GRPCClient, GRAppClientProtocol {
+  public let channel: GRPCChannel
+  public var defaultCallOptions: CallOptions
 
-  /// Asynchronous unary call to Search.
+  /// Creates a client for the spk.App service.
+  ///
+  /// - Parameters:
+  ///   - channel: `GRPCChannel` to the service host.
+  ///   - defaultCallOptions: Options to use for each service call if the user doesn't provide them.
+  public init(channel: GRPCChannel, defaultCallOptions: CallOptions = CallOptions()) {
+    self.channel = channel
+    self.defaultCallOptions = defaultCallOptions
+  }
+
+  /// 搜索接口
   ///
   /// - Parameters:
   ///   - request: Request to send to Search.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  @discardableResult
-  public static func search(_ request: GRAppSearch, completion: @escaping (GRAppSearchResp) -> Void, failure: @escaping (Error) -> Void) -> UnaryCall<GRAppSearch, GRAppSearchResp> {
-    let client = GRAppServiceClient(connection: grpcEngine.makeClientConnection(), defaultCallOptions: grpcEngine.makeOptions())
-    let call = client.makeUnaryCall(path: "/spk.App/Search",
+  public func search(_ request: GRAppSearch, callOptions: CallOptions? = nil) -> UnaryCall<GRAppSearch, GRAppSearchResp> {
+    return self.makeUnaryCall(path: "/spk.App/Search",
                               request: request,
                               callOptions: callOptions ?? self.defaultCallOptions)
-    call.response.whenComplete { (result) in
-       switch result {
-           case .success(let resp):
-               completion(resp)
-           case .failure(let error):
-               failure(error)
-       }
-    }
-    return call
   }
 
 }
+
+
+// Provides conformance to `GRPCPayload` for request and response messages
+extension GRAppSearch: GRPCProtobufPayload {}
+extension GRAppSearchResp: GRPCProtobufPayload {}
 

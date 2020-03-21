@@ -1,34 +1,76 @@
-// Copyright (c) 2015, Google Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 syntax = "proto3";
-
-package echo;
+package spk;
 
 option swift_prefix = "GR";
 
-service Echo {
-  // Immediately returns an echo of a request.
-  rpc Get(EchoRequest) returns (EchoResponse) {}
+service App {
+  // 搜索接口
+  rpc Search(AppSearch) returns (AppSearchResp);
 }
 
-message EchoRequest {
-  // The text of a message to be echoed.
-  string text = 1;
+message AppSearch {
+  XSearch search = 1;
+  int32 offset = 2;
+  int32 limit = 3;
 }
 
-message EchoResponse {
-  // The text of an echo response.
-  string text = 1;
+message AppSearchResp {
+  XList list = 1;
+}
+
+// 搜索条件
+message XSearch {
+  // 关键词
+  string keyword = 1;
+  // 展示类目id
+  int32 dcid = 2;
+    
+  string domain = 4;
+
+  // 通过搜索 id 进行特殊的搜索，并忽略其他搜索条件
+  string profileId = 6;
+  // 搜索类型
+  XSearchType searchType = 5;
+  // 活动id
+  string actId = 7;
+}
+
+enum XSearchType {
+  // 默认搜索来源, ShopHome等
+  XSearchTypeNormal = 0;
+  // PrimeHome
+  XSearchTypePrime = 1;
+  // 卖家店铺, 未实现
+  XSearchTypeSeller = 2;
+  // 通过 profileId 搜索
+  XSearchTypeProfile = 3;
+}
+
+// 列表
+message XList {
+  // 商品总数
+  int32 total = 1;
+  repeated XProductGrid products = 2;
+}
+
+message XProductGrid {
+  // 如果是商品则展示商品
+  XProduct product = 1;
+
+}
+
+message XProduct {
+  int64 gpid = 1;
+  // spu 的 gpid, 可能和 gpid 一致
+  int64 baseGpid = 2;
+  // 商品展示的名字
+  string name = 3;
+  // 标类行业展示的名字, 可能为空
+  string shortName = 4;
+  // 原商品的名称
+  string originName = 5;
+  // 图片
+  string img = 6;
+  // 标题前的icon
+
 }

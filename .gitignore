@@ -2,3 +2,13 @@
 /.build
 /Packages
 /*.xcodeproj
+Plugin/protoc-gen-swiftgrpc
+Plugin/protoc-gen-swift
+*.crt
+*.xcuserstate
+*.xcuserstate
+.swiftpm/xcode/xcuserdata/zhangpeng.xcuserdatad/xcschemes/xcschememanagement.plist
+.swiftpm/xcode/xcuserdata/zhangpeng.xcuserdatad/xcschemes/xcschememanagement.plist
+.swiftpm/xcode/xcuserdata/zhangpeng.xcuserdatad/xcschemes/xcschememanagement.plist
+Plugin/protoc-gen-grpc-swift
+Plugin/ezrpc

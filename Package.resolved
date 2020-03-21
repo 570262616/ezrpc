@@ -11,12 +11,12 @@
         }
       },
       {
-        "package": "GRPC",
+        "package": "grpc-swift",
         "repositoryURL": "https://github.com/grpc/grpc-swift.git",
         "state": {
           "branch": null,
-          "revision": "be70633c91d722496e5fcb225f822edbd5c36a5a",
-          "version": "1.0.0-alpha.9"
+          "revision": "ec809b75721de0e42aebd92a48129573e644f373",
+          "version": "1.0.0-alpha.10"
         }
       },
       {

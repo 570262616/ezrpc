@@ -26,8 +26,8 @@ extension Generator {
   }
 
   private func printServiceClientProtocol() {
-    println("/// Usage: instantiate \(serviceClassName)Client, then call methods of this protocol to make API calls.")
-    println("\(options.visibility.sourceSnippet) protocol \(serviceClassName) {")
+    println("/// Usage: instantiate \(clientClassName), then call methods of this protocol to make API calls.")
+    println("\(options.visibility.sourceSnippet) protocol \(clientProtocolName) {")
     indent()
     for method in service.methods {
       self.method = method
@@ -50,19 +50,19 @@ extension Generator {
   }
 
   private func printServiceClientImplementation() {
-    println("\(access) final class \(serviceClassName)Client: GRPCClient, \(serviceClassName) {")
+    println("\(access) final class \(clientClassName): GRPCClient, \(clientProtocolName) {")
     indent()
-    println("\(access) let connection: ClientConnection")
+    println("\(access) let channel: GRPCChannel")
     println("\(access) var defaultCallOptions: CallOptions")
     println()
     println("/// Creates a client for the \(servicePath) service.")
     println("///")
     printParameters()
-    println("///   - connection: `ClientConnection` to the service host.")
+    println("///   - channel: `GRPCChannel` to the service host.")
     println("///   - defaultCallOptions: Options to use for each service call if the user doesn't provide them.")
-    println("\(access) init(connection: ClientConnection, defaultCallOptions: CallOptions = CallOptions()) {")
+    println("\(access) init(channel: GRPCChannel, defaultCallOptions: CallOptions = CallOptions()) {")
     indent()
-    println("self.connection = connection")
+    println("self.channel = channel")
     println("self.defaultCallOptions = defaultCallOptions")
     outdent()
     println("}")
@@ -70,9 +70,10 @@ extension Generator {
 
     for method in service.methods {
       self.method = method
-      switch streamingType(method) {
+      let streamType = streamingType(self.method)
+      switch streamType {
       case .unary:
-        println("/// Asynchronous unary call to \(method.name).")
+        println(self.method.documentation(streamingType: streamType), newline: false)
         println("///")
         printParameters()
         printRequestParameter()
@@ -87,7 +88,7 @@ extension Generator {
         println("}")
 
       case .serverStreaming:
-        println("/// Asynchronous server-streaming call to \(method.name).")
+        println(self.method.documentation(streamingType: streamType), newline: false)
         println("///")
         printParameters()
         printRequestParameter()
@@ -104,7 +105,7 @@ extension Generator {
         println("}")
 
       case .clientStreaming:
-        println("/// Asynchronous client-streaming call to \(method.name).")
+        println(self.method.documentation(streamingType: streamType), newline: false)
         println("///")
         printClientStreamingDetails()
         println("///")
@@ -119,7 +120,7 @@ extension Generator {
         println("}")
 
       case .bidirectionalStreaming:
-        println("/// Asynchronous bidirectional-streaming call to \(method.name).")
+        println(self.method.documentation(streamingType: streamType), newline: false)
         println("///")
         printClientStreamingDetails()
         println("///")
@@ -160,5 +161,37 @@ extension Generator {
 
   private func printHandlerParameter() {
     println("///   - handler: A closure called when each response is received from the server.")
+  }
+}
+
+fileprivate extension StreamingType {
+  var name: String {
+    switch self {
+    case .unary:
+      return "Unary"
+    case .clientStreaming:
+      return "Client streaming"
+    case .serverStreaming:
+      return "Server streaming"
+    case .bidirectionalStreaming:
+      return "Bidirectional streaming"
+    }
+  }
+}
+
+extension MethodDescriptor {
+  var documentation: String? {
+    let comments = self.protoSourceComments(commentPrefix: "")
+    return comments.isEmpty ? nil : comments
+  }
+
+  fileprivate func documentation(streamingType: StreamingType) -> String {
+    let sourceComments = self.protoSourceComments()
+
+    if sourceComments.isEmpty {
+      return "/// \(streamingType.name) call to \(self.name)\n"  // comments end with "\n" already.
+    } else {
+      return sourceComments  // already prefixed with "///"
+    }
   }
 }

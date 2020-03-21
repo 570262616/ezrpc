@@ -23,11 +23,13 @@ class Generator {
   internal var service: ServiceDescriptor! // context during generation
   internal var method: MethodDescriptor!   // context during generation
 
+  internal var observedMessages: Set<String>
   internal let protobufNamer: SwiftProtobufNamer
 
-  init(_ file: FileDescriptor, options: GeneratorOptions) {
+  init(_ file: FileDescriptor, options: GeneratorOptions, observedMessages: Set<String>) {
     self.file = file
     self.options = options
+    self.observedMessages = observedMessages
     self.printer = CodePrinter()
     self.protobufNamer = SwiftProtobufNamer(
       currentFile: file,
@@ -39,9 +41,11 @@ class Generator {
     return printer.content
   }
 
-  internal func println(_ text: String = "") {
+  internal func println(_ text: String = "", newline: Bool = true) {
     printer.print(text)
-    printer.print("\n")
+    if newline {
+      printer.print("\n")
+    }
   }
 
   internal func indent() {
@@ -106,8 +110,7 @@ class Generator {
     if options.generateClient {
       for service in file.services {
         self.service = service
-        printEZBuyClient()
-//        printClient()
+        printClient()
       }
     }
     println()
@@ -118,5 +121,7 @@ class Generator {
         printServer()
       }
     }
+    self.println()
+    self.printProtobufExtensions()
   }
 }
