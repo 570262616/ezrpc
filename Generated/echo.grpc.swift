@@ -45,8 +45,10 @@ public final class GRAppClient {
     call.response.whenComplete { (result) in
        switch result {
            case .success(let resp):
+               debugPrint("/spk.App/Search resp:", resp)
                DispatchQueue.main.async { completion(resp) }
            case .failure(let error):
+               debugPrint("/spk.App/Search error", error)
                DispatchQueue.main.async { failure(error) }
        }
     }
