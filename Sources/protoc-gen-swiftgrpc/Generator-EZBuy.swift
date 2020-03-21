@@ -24,7 +24,7 @@ extension Generator {
   }
     
   private func printServiceClientImplementation() {
-    println("\(access) final class \(serviceClassName) {")
+    println("\(access) final class \(clientClassName) {")
     println()
     indent()
     for method in service.methods {

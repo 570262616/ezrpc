@@ -29,29 +29,15 @@ func testGRPC() {
     
 }
 
-extension GRAppClient {
-    
-    public static func search(_ request: GRAppSearch, completion: @escaping (GRAppSearchResp) -> Void, failure: @escaping (Error) -> Void) -> UnaryCall<GRAppSearch, GRAppSearchResp> {
-        
-        let client = GRAppClient(connection: makeClientConnection(), defaultCallOptions: makeOptions())
-        
-        
-        
-        let call = client.search(request)
-        
-    
-        
-        call.response.whenComplete { (result) in
-
-            switch result {
-            case .success(let resp):
-                completion(resp)
-            case .failure(let error):
-                failure(error)
-            }
-        }
-        
-//        call.response.always { (result) in
+//extension GRAppClient {
+//
+//    public static func search(_ request: GRAppSearch, completion: @escaping (GRAppSearchResp) -> Void, failure: @escaping (Error) -> Void) -> UnaryCall<GRAppSearch, GRAppSearchResp> {
+//
+//        let client = GRAppClient(channel: makeChannel(), defaultCallOptions: makeOptions())
+//
+//        let call = client.search(request)
+//
+//        call.response.whenComplete { (result) in
 //
 //            switch result {
 //            case .success(let resp):
@@ -60,27 +46,37 @@ extension GRAppClient {
 //                failure(error)
 //            }
 //        }
-        
-        do {
-           let s = try call.response.wait()
-            
-            print(s)
-        } catch let err {
-            print(err)
-        }
-        
-        return call
-    }
-    
-//    public static func getMineService(_ request: NadesicoGetMineServiceReq) throws -> NadesicoGetMineServiceResp {
 //
-//        let client = NadesicoCustomerServiceClient(connection: makeClientConnection(), defaultCallOptions: makeOptions())
+////        call.response.always { (result) in
+////
+////            switch result {
+////            case .success(let resp):
+////                completion(resp)
+////            case .failure(let error):
+////                failure(error)
+////            }
+////        }
 //
-//        let call = client.getMineService(request)
+//        do {
+//           let s = try call.response.wait()
 //
-//        return try call.response.wait()
+//            print(s)
+//        } catch let err {
+//            print(err)
+//        }
+//
+//        return call
 //    }
-}
+//
+////    public static func getMineService(_ request: NadesicoGetMineServiceReq) throws -> NadesicoGetMineServiceResp {
+////
+////        let client = NadesicoCustomerServiceClient(connection: makeClientConnection(), defaultCallOptions: makeOptions())
+////
+////        let call = client.getMineService(request)
+////
+////        return try call.response.wait()
+////    }
+//}
 
 func makeClientConnection() -> ClientConnection {
     
@@ -122,5 +118,13 @@ func makeOptions() -> CallOptions {
     return option
 }
 
-
+func makeChannel() -> GRPCChannel {
+    
+    let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+    
+    let channel = ClientConnection.insecure(group: group)
+      .connect(host: "sg-en-ios-rpc2.65emall.net", port: 2080)
+    
+    return channel
+}
 

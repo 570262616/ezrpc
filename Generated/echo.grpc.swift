@@ -27,35 +27,30 @@ import NIOHTTP1
 import SwiftProtobuf
 
 
-/// Usage: instantiate GRAppClient, then call methods of this protocol to make API calls.
-public protocol GRAppClientProtocol {
-  func search(_ request: GRAppSearch, callOptions: CallOptions?) -> UnaryCall<GRAppSearch, GRAppSearchResp>
-}
+public final class GRAppClient {
 
-public final class GRAppClient: GRPCClient, GRAppClientProtocol {
-  public let channel: GRPCChannel
-  public var defaultCallOptions: CallOptions
-
-  /// Creates a client for the spk.App service.
-  ///
-  /// - Parameters:
-  ///   - channel: `GRPCChannel` to the service host.
-  ///   - defaultCallOptions: Options to use for each service call if the user doesn't provide them.
-  public init(channel: GRPCChannel, defaultCallOptions: CallOptions = CallOptions()) {
-    self.channel = channel
-    self.defaultCallOptions = defaultCallOptions
-  }
-
-  /// 搜索接口
+  /// Asynchronous unary call to Search.
   ///
   /// - Parameters:
   ///   - request: Request to send to Search.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func search(_ request: GRAppSearch, callOptions: CallOptions? = nil) -> UnaryCall<GRAppSearch, GRAppSearchResp> {
-    return self.makeUnaryCall(path: "/spk.App/Search",
+  @discardableResult
+  public static func search(_ request: GRAppSearch, completion: @escaping (GRAppSearchResp) -> Void, failure: @escaping (Error) -> Void) -> Bool {
+    guard let grpcEngine = grpcEngine  else { return false }
+    let client = grpcEngine.client
+    let call = client.makeUnaryCall(path: "/spk.App/Search",
                               request: request,
-                              callOptions: callOptions ?? self.defaultCallOptions)
+                              callOptions: client.defaultCallOptions, responseType: GRAppSearchResp.self)
+    call.response.whenComplete { (result) in
+       switch result {
+           case .success(let resp):
+               DispatchQueue.main.async { completion(resp) }
+           case .failure(let error):
+               DispatchQueue.main.async { failure(error) }
+       }
+    }
+    return true
   }
 
 }
