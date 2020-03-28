@@ -47,7 +47,7 @@ extension Generator {
   }
 
   internal var clientClassName: String {
-    return nameForPackageService(file, service) + "Client"
+    return service.name + "Service"
   }
 
   internal var clientProtocolName: String {
@@ -60,7 +60,7 @@ extension Generator {
 
   internal var methodFunctionName: String {
     let name = method.name
-    return name.prefix(1).lowercased() + name.dropFirst()
+    return name.prefix(1).uppercased() + name.dropFirst()
   }
 
   internal var methodInputName: String {

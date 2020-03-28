@@ -110,7 +110,7 @@ func main() throws {
   // conformance to `GRPCPayload` is generated)
   for fileDescriptor in descriptorSet.files.sorted(by: { $0.name < $1.name }) {
     if fileDescriptor.services.count > 0 {
-      let grpcFileName = uniqueOutputFileName(component: "grpc", fileDescriptor: fileDescriptor, fileNamingOption: options.fileNaming)
+      let grpcFileName = uniqueOutputFileName(component: "client.pb", fileDescriptor: fileDescriptor, fileNamingOption: options.fileNaming)
       let grpcGenerator = Generator(fileDescriptor, options: options, observedMessages: observedMessages)
       var grpcFile = Google_Protobuf_Compiler_CodeGeneratorResponse.File()
       grpcFile.name = grpcFileName

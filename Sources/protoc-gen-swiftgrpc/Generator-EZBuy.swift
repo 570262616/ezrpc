@@ -28,6 +28,8 @@ extension Generator {
     println()
     indent()
     for method in service.methods {
+        guard method.visibility == .public else { continue }
+
       self.method = method
       switch streamingType(method) {
       case .unary:
@@ -38,7 +40,7 @@ extension Generator {
         printCallOptionsParameter()
         println("/// - Returns: A `UnaryCall` with futures for the metadata, status and response.")
         println("@discardableResult")
-        println("\(access) static func \(methodFunctionName)(_ request: \(methodInputName), completion: @escaping (\(methodOutputName)) -> Void, failure: @escaping (Error) -> Void) -> Bool {")
+        println("\(access) static func \(methodFunctionName)(request: \(methodInputName), completion: @escaping (\(methodOutputName)) -> Void, failure: @escaping (Error) -> Void) -> Bool {")
         indent()
         println("guard let grpcEngine = grpcEngine  else { return false }")
         println("let client = grpcEngine.client")

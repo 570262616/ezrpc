@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "CommandLine",
-        "repositoryURL": "https://github.com/570262616/CommandLine.git",
-        "state": {
-          "branch": null,
-          "revision": "6f2201642396364f2028cd7926e05823d04c1571",
-          "version": "5.0.4"
-        }
-      },
-      {
         "package": "grpc-swift",
         "repositoryURL": "https://github.com/grpc/grpc-swift.git",
         "state": {
@@ -71,15 +62,6 @@
           "branch": null,
           "revision": "7790acf0a81d08429cb20375bf42a8c7d279c5fe",
           "version": "1.8.0"
-        }
-      },
-      {
-        "package": "SwiftShell",
-        "repositoryURL": "https://github.com/kareman/SwiftShell",
-        "state": {
-          "branch": null,
-          "revision": "beebe43c986d89ea5359ac3adcb42dac94e5e08a",
-          "version": "4.1.2"
         }
       }
     ]

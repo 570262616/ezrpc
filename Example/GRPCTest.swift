@@ -6,28 +6,52 @@ import GRPC
 import NIOHPACK
 import NIOSSL
 
-func testGRPC() {
-    
-    print("Test")
-    
-    var x = GRXSearch()
-    x.keyword = "shose"
-    
-    
-    var s = GRAppSearch()
-    s.limit = 100
-    s.offset = 0
-    s.search = x
 
-    let call = GRAppClient.search(s, completion: { (resp) in
-        print("Resp:", resp)
-    }, failure: { (err) in
-        print("Error:", err)
-    })
-    
-    
-    
-}
+
+//public func testGRPC() {
+//
+//    print("Test")
+//
+//
+//    var s = GRUserGetMessagesRequest()
+//    s.limit = 20
+//    s.offset = 0
+//
+////    let call = GRAppClient.search(s, completion: { (resp) in
+////        print("Resp:", resp)
+////    }, failure: { (err) in
+////        print("Error:", err)
+////    })
+//
+////    let path = Bundle.main.path(forResource: "rpc.65emall.net", ofType: "crt")!
+////
+////    debugPrint("crt", path)
+//
+//    let group = MultiThreadedEventLoopGroup(numberOfThreads: 4)
+//
+//    let pem = try! NIOSSLCertificate.fromPEMFile("/Users/zhangpeng/Downloads/warehouse/ezrpc/Example/GRPCCrt/rpc.65emall.net.crt")
+//
+//    debugPrint("crt", pem)
+//
+//    let channel = ClientConnection.secure(group: group)
+////            .withTLS(certificateChain: pem)
+//            .withTLS(trustRoots: .certificates(pem))
+//            .connect(host: "sg-en-ios-rpc3.65emall.net", port: 2443)
+//
+//    let client = GRCustomerMessageClient(channel: channel, defaultCallOptions: makeOptions())
+//
+//    let call = client.userGetMessages(s)
+//
+//    do {
+//       let s = try call.response.wait()
+//
+//        print(s)
+//    } catch {
+//        print(error)
+//    }
+//
+//
+//}
 
 //extension GRAppClient {
 //
@@ -110,9 +134,25 @@ func makeClientConnection() -> ClientConnection {
 
 func makeOptions() -> CallOptions {
     
-    let header = HPACKHeaders([("platform", "ios"), ("area","sg"), ("isuat","uat")])
-    
+    var header = HPACKHeaders()
+    header.add(name: "platform", value: "ios")
+    header.add(name: "area", value: "sg" )
+    header.add(name: "version", value: "9140" )
+    header.add(name: "ip", value: "11")
+    header.add(name: "devicetoken", value: "11")
+    header.add(name: "language", value: "en" )
+    header.add(name: "isuat", value: "uat")
 
+    
+//    if let cookie = self.customer?.cookie {
+//        if self.customer?.isGuest == true {
+//            header.add(name: "cookie", value: cookie)
+//        } else {
+            header.add(name: "cookie", value: "65_customer=26AC131D29EB9CDB,DPSA:1jH2oy:yAfS60RI0NjtTwRglkbb6A02yvQ")
+//        }
+//    } else {
+//        header.add(name: "cookie", value: "")
+//    }
     let option = CallOptions(customMetadata: header)
     
     return option
