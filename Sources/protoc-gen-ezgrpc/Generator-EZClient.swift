@@ -18,7 +18,7 @@ import SwiftProtobuf
 import SwiftProtobufPluginLibrary
 
 extension Generator {
-  internal func printEZBuyClient() {
+  internal func printEZClient() {
     println()
     printServiceClientImplementation()
   }
@@ -28,8 +28,6 @@ extension Generator {
     println()
     indent()
     for method in service.methods {
-        guard method.visibility == .public else { continue }
-
       self.method = method
       switch streamingType(method) {
       case .unary:

@@ -1,12 +1,11 @@
-import Generated
+//
+//  File.swift
+//  
+//
+//  Created by zhangpeng on 2020/3/28.
+//
+
 import Foundation
-import SwiftProtobuf
-import NIO
-import GRPC
-import NIOHPACK
-import NIOSSL
-
-
 
 //public func testGRPC() {
 //
@@ -102,69 +101,68 @@ import NIOSSL
 ////    }
 //}
 
-func makeClientConnection() -> ClientConnection {
-    
-    let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-    //    defer {
-    //        try? group.syncShutdownGracefully()
-    ////        group.shutdownGracefully(queue: .global()) { (err) in
-    ////            print(err)
-    ////        }
-    ////        group.shutdownGracefully { (err) in
-    ////            print(err)
-    ////        }
-    //    }
-    
-    let configuration = ClientConnection.Configuration(
+//func makeClientConnection() -> ClientConnection {
+//
+//    let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+//    //    defer {
+//    //        try? group.syncShutdownGracefully()
+//    ////        group.shutdownGracefully(queue: .global()) { (err) in
+//    ////            print(err)
+//    ////        }
+//    ////        group.shutdownGracefully { (err) in
+//    ////            print(err)
+//    ////        }
+//    //    }
+//
+//    let configuration = ClientConnection.Configuration(
+//
+//            // dev insecure
+//            target: .hostAndPort("sg-en-ios-rpc2.65emall.net", 2080),
+//            eventLoopGroup: group
+//
+//            // dev secure
+//    //         target: .hostAndPort("sg-en-ios-rpc2.ezbuy.sg", 2443),
+//    //         eventLoopGroup: group,
+//    //         tls: .init(certificateChain: try! NIOSSLCertificate.fromPEMFile("/Users/zhangpeng/Downloads/warehouse/ezrpc/Sources/ezrpc/GRPCCrt/rpc.ezbuy.sg.crt").map { .certificate($0) })
+//        )
+//
+//    let connection = ClientConnection(configuration: configuration)
+//
+//    return connection
+//}
 
-            // dev insecure
-            target: .hostAndPort("sg-en-ios-rpc2.65emall.net", 2080),
-            eventLoopGroup: group
-            
-            // dev secure
-    //         target: .hostAndPort("sg-en-ios-rpc2.ezbuy.sg", 2443),
-    //         eventLoopGroup: group,
-    //         tls: .init(certificateChain: try! NIOSSLCertificate.fromPEMFile("/Users/zhangpeng/Downloads/warehouse/ezrpc/Sources/ezrpc/GRPCCrt/rpc.ezbuy.sg.crt").map { .certificate($0) })
-        )
-
-    let connection = ClientConnection(configuration: configuration)
-    
-    return connection
-}
-
-func makeOptions() -> CallOptions {
-    
-    var header = HPACKHeaders()
-    header.add(name: "platform", value: "ios")
-    header.add(name: "area", value: "sg" )
-    header.add(name: "version", value: "9140" )
-    header.add(name: "ip", value: "11")
-    header.add(name: "devicetoken", value: "11")
-    header.add(name: "language", value: "en" )
-    header.add(name: "isuat", value: "uat")
-
-    
-//    if let cookie = self.customer?.cookie {
-//        if self.customer?.isGuest == true {
-//            header.add(name: "cookie", value: cookie)
-//        } else {
-            header.add(name: "cookie", value: "65_customer=26AC131D29EB9CDB,DPSA:1jH2oy:yAfS60RI0NjtTwRglkbb6A02yvQ")
-//        }
-//    } else {
-//        header.add(name: "cookie", value: "")
-//    }
-    let option = CallOptions(customMetadata: header)
-    
-    return option
-}
-
-func makeChannel() -> GRPCChannel {
-    
-    let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-    
-    let channel = ClientConnection.insecure(group: group)
-      .connect(host: "sg-en-ios-rpc2.65emall.net", port: 2080)
-    
-    return channel
-}
-
+//func makeOptions() -> CallOptions {
+//    
+//    var header = HPACKHeaders()
+//    header.add(name: "platform", value: "ios")
+//    header.add(name: "area", value: "sg" )
+//    header.add(name: "version", value: "9140" )
+//    header.add(name: "ip", value: "11")
+//    header.add(name: "devicetoken", value: "11")
+//    header.add(name: "language", value: "en" )
+//    header.add(name: "isuat", value: "uat")
+//
+//    
+////    if let cookie = self.customer?.cookie {
+////        if self.customer?.isGuest == true {
+////            header.add(name: "cookie", value: cookie)
+////        } else {
+//            header.add(name: "cookie", value: "65_customer=26AC131D29EB9CDB,DPSA:1jH2oy:yAfS60RI0NjtTwRglkbb6A02yvQ")
+////        }
+////    } else {
+////        header.add(name: "cookie", value: "")
+////    }
+//    let option = CallOptions(customMetadata: header)
+//    
+//    return option
+//}
+//
+//func makeChannel() -> GRPCChannel {
+//    
+//    let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+//    
+//    let channel = ClientConnection.insecure(group: group)
+//      .connect(host: "sg-en-ios-rpc2.65emall.net", port: 2080)
+//    
+//    return channel
+//}

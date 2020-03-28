@@ -1,38 +1,19 @@
 
 default:	build
 
-# build: clear
-# 	swift build # This run is to build the template encoder
-# 	.build/debug/TemplateEncoder > Sources/protoc-gen-swiftgrpc/templates.swift
-# 	swift build # This run is to build the plugin
-# 	cp .build/debug/ezrpc ./Plugin
-# 	cp .build/debug/protoc-gen-swiftgrpc ./Plugin
-# 	cp .build/debug/protoc-gen-swift ./Plugin
-
 build:
-	swift build --product ezrpc -c release
 	swift build --product protoc-gen-swift -c release
-	swift build --product protoc-gen-grpc-swift -c release
-	swift build --product protoc-gen-swiftgrpc -c release
-	cp .build/release/ezrpc ./Plugin
+	swift build --product protoc-gen-ezgrpc -c release
 	cp .build/release/protoc-gen-swift ./Plugin
-	cp .build/release/protoc-gen-grpc-swift ./Plugin
-	cp .build/release/protoc-gen-swiftgrpc ./Plugin
-	
-buildNew:
-	swift build --product protoc-gen-swiftgrpc -c release
-	cp .build/release/protoc-gen-swiftgrpc ./Plugin
+	cp .build/release/protoc-gen-ezgrpc ./Plugin
 
-
-#gen:
-#	protoc ./Example/echo.proto --proto_path=./Example/ --plugin=./Plugin/protoc-gen-swiftgrpc --plugin=./Plugin/protoc-gen-swift --grpc-swift_opt=Visibility=Public --swift_opt=Visibility=Public --grpc-swift_opt=Client=true,Server=false --grpc-swift_out=./Generated --swift_out=./Generated
 
 gen:
-	protoc ./Example/ezbuy.proto --proto_path=./Example/ --plugin=./Plugin/protoc-gen-swiftgrpc --plugin=./Plugin/protoc-gen-swift --swiftgrpc_opt=Visibility=Public --swift_opt=Visibility=Public --swiftgrpc_opt=Client=true,Server=false --swiftgrpc_out=./Generated --swift_out=./Generated
-	protoc ./Example/echo.proto --proto_path=./Example/ --plugin=./Plugin/protoc-gen-swiftgrpc --plugin=./Plugin/protoc-gen-swift --swiftgrpc_opt=Visibility=Public --swift_opt=Visibility=Public --swiftgrpc_opt=Client=true,Server=false --swiftgrpc_out=./Generated --swift_out=./Generated
+	protoc ./Example/EchoModel/echo.proto --proto_path=./Example/ --plugin=./Plugin/protoc-gen-ezgrpc --plugin=./Plugin/protoc-gen-swift --swiftgrpc_opt=Visibility=Public --swift_opt=Visibility=Public --swiftgrpc_opt=Client=true,Server=false --swiftgrpc_out=./Example/EchoModel --swift_out=./Example/EchoModel
 
 clear : 
-	rm -f ./Generated/*
+	rm -f ./Example/EchoModel/echo.pb.swift
+	rm -f ./Example/EchoModel/echo.pb.client.swift
 
 clean : 
 	rm -rf protoc-gen-swiftgrpc Packages .build protoc-gen-swift Package.pins
