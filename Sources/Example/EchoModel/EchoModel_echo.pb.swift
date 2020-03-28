@@ -20,7 +20,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// from Common.proto
-public enum UsermsgcenterTServiceType: SwiftProtobuf.Enum {
+public enum UMCTServiceType: SwiftProtobuf.Enum {
   public typealias RawValue = Int
   case other // = 0
   case buy4Me // = 1
@@ -59,9 +59,9 @@ public enum UsermsgcenterTServiceType: SwiftProtobuf.Enum {
 
 #if swift(>=4.2)
 
-extension UsermsgcenterTServiceType: CaseIterable {
+extension UMCTServiceType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [UsermsgcenterTServiceType] = [
+  public static var allCases: [UMCTServiceType] = [
     .other,
     .buy4Me,
     .ship4Me,
@@ -72,7 +72,7 @@ extension UsermsgcenterTServiceType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
-public enum UsermsgcenterTMessageType: SwiftProtobuf.Enum {
+public enum UMCTMessageType: SwiftProtobuf.Enum {
   public typealias RawValue = Int
   case normal // = 0
   case orderPending // = 1
@@ -120,9 +120,9 @@ public enum UsermsgcenterTMessageType: SwiftProtobuf.Enum {
 
 #if swift(>=4.2)
 
-extension UsermsgcenterTMessageType: CaseIterable {
+extension UMCTMessageType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [UsermsgcenterTMessageType] = [
+  public static var allCases: [UMCTMessageType] = [
     .normal,
     .orderPending,
     .orderArrived,
@@ -137,14 +137,14 @@ extension UsermsgcenterTMessageType: CaseIterable {
 #endif  // swift(>=4.2)
 
 /// from ReadyToShip.proto
-public struct UsermsgcenterTReadyToShipGroup {
+public struct UMCTReadyToShipGroup {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   public var itemsCount: Int32 = 0
 
-  public var serviceType: UsermsgcenterTServiceType = .other
+  public var serviceType: UMCTServiceType = .other
 
   public var warehouseCode: String = String()
 
@@ -171,7 +171,7 @@ public struct UsermsgcenterTReadyToShipGroup {
   public init() {}
 }
 
-public struct UsermsgcenterTMessage {
+public struct UMCTMessage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -192,10 +192,10 @@ public struct UsermsgcenterTMessage {
 
   public var updateDate: String = String()
 
-  public var type: UsermsgcenterTMessageType = .normal
+  public var type: UMCTMessageType = .normal
 
-  public var readyToShipGroup: UsermsgcenterTReadyToShipGroup {
-    get {return _readyToShipGroup ?? UsermsgcenterTReadyToShipGroup()}
+  public var readyToShipGroup: UMCTReadyToShipGroup {
+    get {return _readyToShipGroup ?? UMCTReadyToShipGroup()}
     set {_readyToShipGroup = newValue}
   }
   /// Returns true if `readyToShipGroup` has been explicitly set.
@@ -211,8 +211,8 @@ public struct UsermsgcenterTMessage {
 
   public var actionType: String = String()
 
-  public var detail: UsermsgcenterPendingReplyDetail {
-    get {return _detail ?? UsermsgcenterPendingReplyDetail()}
+  public var detail: UMCPendingReplyDetail {
+    get {return _detail ?? UMCPendingReplyDetail()}
     set {_detail = newValue}
   }
   /// Returns true if `detail` has been explicitly set.
@@ -224,25 +224,25 @@ public struct UsermsgcenterTMessage {
 
   public init() {}
 
-  fileprivate var _readyToShipGroup: UsermsgcenterTReadyToShipGroup? = nil
-  fileprivate var _detail: UsermsgcenterPendingReplyDetail? = nil
+  fileprivate var _readyToShipGroup: UMCTReadyToShipGroup? = nil
+  fileprivate var _detail: UMCPendingReplyDetail? = nil
 }
 
-public struct UsermsgcenterPendingReplyDetail {
+public struct UMCPendingReplyDetail {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   public var newOrderItemID: Int64 = 0
 
-  public var serviceType: UsermsgcenterTServiceType = .other
+  public var serviceType: UMCTServiceType = .other
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 }
 
-public struct UsermsgcenterUserDeleteMessagesRequest {
+public struct UMCUserDeleteMessagesRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -254,7 +254,7 @@ public struct UsermsgcenterUserDeleteMessagesRequest {
   public init() {}
 }
 
-public struct UsermsgcenterUserGetMessagesRequest {
+public struct UMCUserGetMessagesRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -268,7 +268,7 @@ public struct UsermsgcenterUserGetMessagesRequest {
   public init() {}
 }
 
-public struct UsermsgcenterUserGetUnreadMessageCountRequest {
+public struct UMCUserGetUnreadMessageCountRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -278,7 +278,7 @@ public struct UsermsgcenterUserGetUnreadMessageCountRequest {
   public init() {}
 }
 
-public struct UsermsgcenterUserSetAllMessagesReadRequest {
+public struct UMCUserSetAllMessagesReadRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -288,7 +288,7 @@ public struct UsermsgcenterUserSetAllMessagesReadRequest {
   public init() {}
 }
 
-public struct UsermsgcenterUserSetMessageReadRequest {
+public struct UMCUserSetMessageReadRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -300,7 +300,7 @@ public struct UsermsgcenterUserSetMessageReadRequest {
   public init() {}
 }
 
-public struct UsermsgcenterUserSetMessagesReadRequest {
+public struct UMCUserSetMessagesReadRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -312,7 +312,7 @@ public struct UsermsgcenterUserSetMessagesReadRequest {
   public init() {}
 }
 
-public struct UsermsgcenterUserDeleteMessagesResponse {
+public struct UMCUserDeleteMessagesResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -324,19 +324,19 @@ public struct UsermsgcenterUserDeleteMessagesResponse {
   public init() {}
 }
 
-public struct UsermsgcenterUserGetMessagesResponse {
+public struct UMCUserGetMessagesResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var result: [UsermsgcenterTMessage] = []
+  public var result: [UMCTMessage] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 }
 
-public struct UsermsgcenterUserGetUnreadMessageCountResponse {
+public struct UMCUserGetUnreadMessageCountResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -348,7 +348,7 @@ public struct UsermsgcenterUserGetUnreadMessageCountResponse {
   public init() {}
 }
 
-public struct UsermsgcenterUserSetAllMessagesReadResponse {
+public struct UMCUserSetAllMessagesReadResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -360,7 +360,7 @@ public struct UsermsgcenterUserSetAllMessagesReadResponse {
   public init() {}
 }
 
-public struct UsermsgcenterUserSetMessageReadResponse {
+public struct UMCUserSetMessageReadResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -370,7 +370,7 @@ public struct UsermsgcenterUserSetMessageReadResponse {
   public init() {}
 }
 
-public struct UsermsgcenterUserSetMessagesReadResponse {
+public struct UMCUserSetMessagesReadResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -384,7 +384,7 @@ public struct UsermsgcenterUserSetMessagesReadResponse {
 
 fileprivate let _protobuf_package = "usermsgcenter"
 
-extension UsermsgcenterTServiceType: SwiftProtobuf._ProtoNameProviding {
+extension UMCTServiceType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "TServiceTypeOther"),
     1: .same(proto: "TServiceTypeBuy4Me"),
@@ -394,7 +394,7 @@ extension UsermsgcenterTServiceType: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
-extension UsermsgcenterTMessageType: SwiftProtobuf._ProtoNameProviding {
+extension UMCTMessageType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "TMessageTypeNormal"),
     1: .same(proto: "TMessageTypeOrderPending"),
@@ -407,7 +407,7 @@ extension UsermsgcenterTMessageType: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
-extension UsermsgcenterTReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCTReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TReadyToShipGroup"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "itemsCount"),
@@ -484,7 +484,7 @@ extension UsermsgcenterTReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterTReadyToShipGroup, rhs: UsermsgcenterTReadyToShipGroup) -> Bool {
+  public static func ==(lhs: UMCTReadyToShipGroup, rhs: UMCTReadyToShipGroup) -> Bool {
     if lhs.itemsCount != rhs.itemsCount {return false}
     if lhs.serviceType != rhs.serviceType {return false}
     if lhs.warehouseCode != rhs.warehouseCode {return false}
@@ -502,7 +502,7 @@ extension UsermsgcenterTReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension UsermsgcenterTMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCTMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TMessage"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
@@ -589,7 +589,7 @@ extension UsermsgcenterTMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterTMessage, rhs: UsermsgcenterTMessage) -> Bool {
+  public static func ==(lhs: UMCTMessage, rhs: UMCTMessage) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.messageType != rhs.messageType {return false}
     if lhs.message != rhs.message {return false}
@@ -609,7 +609,7 @@ extension UsermsgcenterTMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension UsermsgcenterPendingReplyDetail: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCPendingReplyDetail: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PendingReplyDetail"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "newOrderItemId"),
@@ -636,7 +636,7 @@ extension UsermsgcenterPendingReplyDetail: SwiftProtobuf.Message, SwiftProtobuf.
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterPendingReplyDetail, rhs: UsermsgcenterPendingReplyDetail) -> Bool {
+  public static func ==(lhs: UMCPendingReplyDetail, rhs: UMCPendingReplyDetail) -> Bool {
     if lhs.newOrderItemID != rhs.newOrderItemID {return false}
     if lhs.serviceType != rhs.serviceType {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -644,7 +644,7 @@ extension UsermsgcenterPendingReplyDetail: SwiftProtobuf.Message, SwiftProtobuf.
   }
 }
 
-extension UsermsgcenterUserDeleteMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserDeleteMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserDeleteMessagesRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "messageIDs"),
@@ -666,14 +666,14 @@ extension UsermsgcenterUserDeleteMessagesRequest: SwiftProtobuf.Message, SwiftPr
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserDeleteMessagesRequest, rhs: UsermsgcenterUserDeleteMessagesRequest) -> Bool {
+  public static func ==(lhs: UMCUserDeleteMessagesRequest, rhs: UMCUserDeleteMessagesRequest) -> Bool {
     if lhs.messageIds != rhs.messageIds {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserGetMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserGetMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserGetMessagesRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "offset"),
@@ -700,7 +700,7 @@ extension UsermsgcenterUserGetMessagesRequest: SwiftProtobuf.Message, SwiftProto
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserGetMessagesRequest, rhs: UsermsgcenterUserGetMessagesRequest) -> Bool {
+  public static func ==(lhs: UMCUserGetMessagesRequest, rhs: UMCUserGetMessagesRequest) -> Bool {
     if lhs.offset != rhs.offset {return false}
     if lhs.limit != rhs.limit {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -708,7 +708,7 @@ extension UsermsgcenterUserGetMessagesRequest: SwiftProtobuf.Message, SwiftProto
   }
 }
 
-extension UsermsgcenterUserGetUnreadMessageCountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserGetUnreadMessageCountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserGetUnreadMessageCountRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -721,13 +721,13 @@ extension UsermsgcenterUserGetUnreadMessageCountRequest: SwiftProtobuf.Message, 
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserGetUnreadMessageCountRequest, rhs: UsermsgcenterUserGetUnreadMessageCountRequest) -> Bool {
+  public static func ==(lhs: UMCUserGetUnreadMessageCountRequest, rhs: UMCUserGetUnreadMessageCountRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserSetAllMessagesReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserSetAllMessagesReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserSetAllMessagesReadRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -740,13 +740,13 @@ extension UsermsgcenterUserSetAllMessagesReadRequest: SwiftProtobuf.Message, Swi
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserSetAllMessagesReadRequest, rhs: UsermsgcenterUserSetAllMessagesReadRequest) -> Bool {
+  public static func ==(lhs: UMCUserSetAllMessagesReadRequest, rhs: UMCUserSetAllMessagesReadRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserSetMessageReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserSetMessageReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserSetMessageReadRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "messageId"),
@@ -768,14 +768,14 @@ extension UsermsgcenterUserSetMessageReadRequest: SwiftProtobuf.Message, SwiftPr
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserSetMessageReadRequest, rhs: UsermsgcenterUserSetMessageReadRequest) -> Bool {
+  public static func ==(lhs: UMCUserSetMessageReadRequest, rhs: UMCUserSetMessageReadRequest) -> Bool {
     if lhs.messageID != rhs.messageID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserSetMessagesReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserSetMessagesReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserSetMessagesReadRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "messageIDs"),
@@ -797,14 +797,14 @@ extension UsermsgcenterUserSetMessagesReadRequest: SwiftProtobuf.Message, SwiftP
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserSetMessagesReadRequest, rhs: UsermsgcenterUserSetMessagesReadRequest) -> Bool {
+  public static func ==(lhs: UMCUserSetMessagesReadRequest, rhs: UMCUserSetMessagesReadRequest) -> Bool {
     if lhs.messageIds != rhs.messageIds {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserDeleteMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserDeleteMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserDeleteMessagesResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
@@ -826,14 +826,14 @@ extension UsermsgcenterUserDeleteMessagesResponse: SwiftProtobuf.Message, SwiftP
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserDeleteMessagesResponse, rhs: UsermsgcenterUserDeleteMessagesResponse) -> Bool {
+  public static func ==(lhs: UMCUserDeleteMessagesResponse, rhs: UMCUserDeleteMessagesResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserGetMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserGetMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserGetMessagesResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
@@ -855,14 +855,14 @@ extension UsermsgcenterUserGetMessagesResponse: SwiftProtobuf.Message, SwiftProt
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserGetMessagesResponse, rhs: UsermsgcenterUserGetMessagesResponse) -> Bool {
+  public static func ==(lhs: UMCUserGetMessagesResponse, rhs: UMCUserGetMessagesResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserGetUnreadMessageCountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserGetUnreadMessageCountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserGetUnreadMessageCountResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
@@ -884,14 +884,14 @@ extension UsermsgcenterUserGetUnreadMessageCountResponse: SwiftProtobuf.Message,
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserGetUnreadMessageCountResponse, rhs: UsermsgcenterUserGetUnreadMessageCountResponse) -> Bool {
+  public static func ==(lhs: UMCUserGetUnreadMessageCountResponse, rhs: UMCUserGetUnreadMessageCountResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserSetAllMessagesReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserSetAllMessagesReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserSetAllMessagesReadResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
@@ -913,14 +913,14 @@ extension UsermsgcenterUserSetAllMessagesReadResponse: SwiftProtobuf.Message, Sw
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserSetAllMessagesReadResponse, rhs: UsermsgcenterUserSetAllMessagesReadResponse) -> Bool {
+  public static func ==(lhs: UMCUserSetAllMessagesReadResponse, rhs: UMCUserSetAllMessagesReadResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserSetMessageReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserSetMessageReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserSetMessageReadResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -933,13 +933,13 @@ extension UsermsgcenterUserSetMessageReadResponse: SwiftProtobuf.Message, SwiftP
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserSetMessageReadResponse, rhs: UsermsgcenterUserSetMessageReadResponse) -> Bool {
+  public static func ==(lhs: UMCUserSetMessageReadResponse, rhs: UMCUserSetMessageReadResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension UsermsgcenterUserSetMessagesReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension UMCUserSetMessagesReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UserSetMessagesReadResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -952,7 +952,7 @@ extension UsermsgcenterUserSetMessagesReadResponse: SwiftProtobuf.Message, Swift
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: UsermsgcenterUserSetMessagesReadResponse, rhs: UsermsgcenterUserSetMessagesReadResponse) -> Bool {
+  public static func ==(lhs: UMCUserSetMessagesReadResponse, rhs: UMCUserSetMessagesReadResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

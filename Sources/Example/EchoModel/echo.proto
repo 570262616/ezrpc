@@ -5,7 +5,7 @@ package usermsgcenter;
 option csharp_namespace = "Zen.DataAccess.CustomerMessage";
 option java_package = "com.daigou.sg.rpc.message";
 
-option swift_prefix = "Usermsgcenter";
+option swift_prefix = "UMC";
 
 // from ReadyToShip.proto
 message TReadyToShipGroup {

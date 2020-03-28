@@ -27,7 +27,7 @@ import NIOHTTP1
 import SwiftProtobuf
 
 
-public final class CustomerMessageService {
+public final class UMCCustomerMessageClient {
 
   /// Asynchronous unary call to UserDeleteMessages.
   ///
@@ -36,12 +36,12 @@ public final class CustomerMessageService {
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   @discardableResult
-  public static func UserDeleteMessages(request: UsermsgcenterUserDeleteMessagesRequest, completion: @escaping (UsermsgcenterUserDeleteMessagesResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
+  public static func UserDeleteMessages(request: UMCUserDeleteMessagesRequest, completion: @escaping (UMCUserDeleteMessagesResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
     guard let grpcEngine = grpcEngine  else { return false }
     let client = grpcEngine.client
     let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserDeleteMessages",
                               request: request,
-                              callOptions: client.defaultCallOptions, responseType: UsermsgcenterUserDeleteMessagesResponse.self)
+                              callOptions: client.defaultCallOptions, responseType: UMCUserDeleteMessagesResponse.self)
     call.response.whenComplete { (result) in
        switch result {
            case .success(let resp):
@@ -62,12 +62,12 @@ public final class CustomerMessageService {
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   @discardableResult
-  public static func UserGetMessages(request: UsermsgcenterUserGetMessagesRequest, completion: @escaping (UsermsgcenterUserGetMessagesResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
+  public static func UserGetMessages(request: UMCUserGetMessagesRequest, completion: @escaping (UMCUserGetMessagesResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
     guard let grpcEngine = grpcEngine  else { return false }
     let client = grpcEngine.client
     let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserGetMessages",
                               request: request,
-                              callOptions: client.defaultCallOptions, responseType: UsermsgcenterUserGetMessagesResponse.self)
+                              callOptions: client.defaultCallOptions, responseType: UMCUserGetMessagesResponse.self)
     call.response.whenComplete { (result) in
        switch result {
            case .success(let resp):
@@ -88,12 +88,12 @@ public final class CustomerMessageService {
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   @discardableResult
-  public static func UserGetUnreadMessageCount(request: UsermsgcenterUserGetUnreadMessageCountRequest, completion: @escaping (UsermsgcenterUserGetUnreadMessageCountResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
+  public static func UserGetUnreadMessageCount(request: UMCUserGetUnreadMessageCountRequest, completion: @escaping (UMCUserGetUnreadMessageCountResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
     guard let grpcEngine = grpcEngine  else { return false }
     let client = grpcEngine.client
     let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserGetUnreadMessageCount",
                               request: request,
-                              callOptions: client.defaultCallOptions, responseType: UsermsgcenterUserGetUnreadMessageCountResponse.self)
+                              callOptions: client.defaultCallOptions, responseType: UMCUserGetUnreadMessageCountResponse.self)
     call.response.whenComplete { (result) in
        switch result {
            case .success(let resp):
@@ -114,12 +114,12 @@ public final class CustomerMessageService {
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   @discardableResult
-  public static func UserSetAllMessagesRead(request: UsermsgcenterUserSetAllMessagesReadRequest, completion: @escaping (UsermsgcenterUserSetAllMessagesReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
+  public static func UserSetAllMessagesRead(request: UMCUserSetAllMessagesReadRequest, completion: @escaping (UMCUserSetAllMessagesReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
     guard let grpcEngine = grpcEngine  else { return false }
     let client = grpcEngine.client
     let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserSetAllMessagesRead",
                               request: request,
-                              callOptions: client.defaultCallOptions, responseType: UsermsgcenterUserSetAllMessagesReadResponse.self)
+                              callOptions: client.defaultCallOptions, responseType: UMCUserSetAllMessagesReadResponse.self)
     call.response.whenComplete { (result) in
        switch result {
            case .success(let resp):
@@ -140,12 +140,12 @@ public final class CustomerMessageService {
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   @discardableResult
-  public static func UserSetMessageRead(request: UsermsgcenterUserSetMessageReadRequest, completion: @escaping (UsermsgcenterUserSetMessageReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
+  public static func UserSetMessageRead(request: UMCUserSetMessageReadRequest, completion: @escaping (UMCUserSetMessageReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
     guard let grpcEngine = grpcEngine  else { return false }
     let client = grpcEngine.client
     let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserSetMessageRead",
                               request: request,
-                              callOptions: client.defaultCallOptions, responseType: UsermsgcenterUserSetMessageReadResponse.self)
+                              callOptions: client.defaultCallOptions, responseType: UMCUserSetMessageReadResponse.self)
     call.response.whenComplete { (result) in
        switch result {
            case .success(let resp):
@@ -166,12 +166,12 @@ public final class CustomerMessageService {
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   @discardableResult
-  public static func UserSetMessagesRead(request: UsermsgcenterUserSetMessagesReadRequest, completion: @escaping (UsermsgcenterUserSetMessagesReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
+  public static func UserSetMessagesRead(request: UMCUserSetMessagesReadRequest, completion: @escaping (UMCUserSetMessagesReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
     guard let grpcEngine = grpcEngine  else { return false }
     let client = grpcEngine.client
     let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserSetMessagesRead",
                               request: request,
-                              callOptions: client.defaultCallOptions, responseType: UsermsgcenterUserSetMessagesReadResponse.self)
+                              callOptions: client.defaultCallOptions, responseType: UMCUserSetMessagesReadResponse.self)
     call.response.whenComplete { (result) in
        switch result {
            case .success(let resp):
@@ -189,16 +189,16 @@ public final class CustomerMessageService {
 
 
 // Provides conformance to `GRPCPayload` for request and response messages
-extension UsermsgcenterUserDeleteMessagesRequest: GRPCProtobufPayload {}
-extension UsermsgcenterUserDeleteMessagesResponse: GRPCProtobufPayload {}
-extension UsermsgcenterUserGetMessagesRequest: GRPCProtobufPayload {}
-extension UsermsgcenterUserGetMessagesResponse: GRPCProtobufPayload {}
-extension UsermsgcenterUserGetUnreadMessageCountRequest: GRPCProtobufPayload {}
-extension UsermsgcenterUserGetUnreadMessageCountResponse: GRPCProtobufPayload {}
-extension UsermsgcenterUserSetAllMessagesReadRequest: GRPCProtobufPayload {}
-extension UsermsgcenterUserSetAllMessagesReadResponse: GRPCProtobufPayload {}
-extension UsermsgcenterUserSetMessageReadRequest: GRPCProtobufPayload {}
-extension UsermsgcenterUserSetMessageReadResponse: GRPCProtobufPayload {}
-extension UsermsgcenterUserSetMessagesReadRequest: GRPCProtobufPayload {}
-extension UsermsgcenterUserSetMessagesReadResponse: GRPCProtobufPayload {}
+extension UMCUserDeleteMessagesRequest: GRPCProtobufPayload {}
+extension UMCUserDeleteMessagesResponse: GRPCProtobufPayload {}
+extension UMCUserGetMessagesRequest: GRPCProtobufPayload {}
+extension UMCUserGetMessagesResponse: GRPCProtobufPayload {}
+extension UMCUserGetUnreadMessageCountRequest: GRPCProtobufPayload {}
+extension UMCUserGetUnreadMessageCountResponse: GRPCProtobufPayload {}
+extension UMCUserSetAllMessagesReadRequest: GRPCProtobufPayload {}
+extension UMCUserSetAllMessagesReadResponse: GRPCProtobufPayload {}
+extension UMCUserSetMessageReadRequest: GRPCProtobufPayload {}
+extension UMCUserSetMessageReadResponse: GRPCProtobufPayload {}
+extension UMCUserSetMessagesReadRequest: GRPCProtobufPayload {}
+extension UMCUserSetMessagesReadResponse: GRPCProtobufPayload {}
 
