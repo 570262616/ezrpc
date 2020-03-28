@@ -1,7 +1,7 @@
 
 
 plugins=--plugin=./Plugin/protoc-gen-ezgrpc --plugin=./Plugin/protoc-gen-swift
-options=--ezgrpc_opt=Visibility=Public --ezgrpc_opt=Client=true,Server=false --swift_opt=Visibility=Public
+options=--ezgrpc_opt=Visibility=Public --ezgrpc_opt=Client=true,Server=false --swift_opt=Visibility=Public --ezgrpc_opt=FileNaming=PathToUnderscores --swift_opt=FileNaming=PathToUnderscores
 out=--ezgrpc_out=./Sources/Example/EchoModel --swift_out=./Sources/Example/EchoModel
 
 default:	build
