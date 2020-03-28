@@ -1,4 +1,9 @@
 
+
+plugins=--plugin=./Plugin/protoc-gen-ezgrpc --plugin=./Plugin/protoc-gen-swift
+options=--ezgrpc_opt=Visibility=Public --ezgrpc_opt=Client=true,Server=false --swift_opt=Visibility=Public
+out=--ezgrpc_out=./Sources/Example/EchoModel --swift_out=./Sources/Example/EchoModel
+
 default:	build
 
 build:
@@ -9,8 +14,9 @@ build:
 
 
 gen:
-	protoc ./Example/EchoModel/echo.proto --proto_path=./Example/ --plugin=./Plugin/protoc-gen-ezgrpc --plugin=./Plugin/protoc-gen-swift --swiftgrpc_opt=Visibility=Public --swift_opt=Visibility=Public --swiftgrpc_opt=Client=true,Server=false --swiftgrpc_out=./Example/EchoModel --swift_out=./Example/EchoModel
 
+	./Plugin/protoc ./Sources/Example/EchoModel/echo.proto --proto_path=./Sources/Example/ $(plugins) $(options) $(out)
+	
 clear : 
 	rm -f ./Example/EchoModel/echo.pb.swift
 	rm -f ./Example/EchoModel/echo.pb.client.swift

@@ -37,8 +37,6 @@ let package = Package(
           name: "EchoModel",
           dependencies: [
             "GRPC",
-            "NIO",
-            "NIOHTTP1",
             "SwiftProtobuf"
           ],
           path: "Sources/Example/EchoModel/"

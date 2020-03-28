@@ -1,76 +1,121 @@
 syntax = "proto3";
-package spk;
 
-option swift_prefix = "GR";
+package usermsgcenter;
 
-service App {
-  // 搜索接口
-  rpc Search(AppSearch) returns (AppSearchResp);
+option csharp_namespace = "Zen.DataAccess.CustomerMessage";
+option java_package = "com.daigou.sg.rpc.message";
+
+option swift_prefix = "Usermsgcenter";
+
+// from ReadyToShip.proto
+message TReadyToShipGroup {
+    int32 itemsCount = 1;
+    TServiceType serviceType = 2;
+    string warehouseCode = 3;
+    string shippingMethodCode = 4;
+    string shippingMethodName = 5;
+    repeated string itemsPics = 6;
+    string status = 7;
+    int32 freeStorageDays = 8;
+    int32 chargedStorageDays = 9;
+    double storageFee = 10;
+    int32 notArrivedItemCount = 11;
+    int64 shippingMethodId = 12;
 }
 
-message AppSearch {
-  XSearch search = 1;
-  int32 offset = 2;
-  int32 limit = 3;
+// from Common.proto
+enum TServiceType {
+    TServiceTypeOther = 0;
+    TServiceTypeBuy4Me = 1;
+    TServiceTypeShip4Me = 2;
+    TServiceTypeEzbuy = 3;
+    TServiceTypePrime = 4;
 }
 
-message AppSearchResp {
-  XList list = 1;
+enum TMessageType {
+    TMessageTypeNormal = 0;
+    TMessageTypeOrderPending = 1;
+    TMessageTypeOrderArrived = 2;
+    TMessageTypeParcelArrangeable = 3;
+    TMessageTypeEnquiry = 4;
+    TMessageTypeWeb = 5;
+    TMessageTypeParcelPending = 6;
+    TMessageTypeFirebaseCallback = 7;
 }
 
-// 搜索条件
-message XSearch {
-  // 关键词
-  string keyword = 1;
-  // 展示类目id
-  int32 dcid = 2;
-    
-  string domain = 4;
-
-  // 通过搜索 id 进行特殊的搜索，并忽略其他搜索条件
-  string profileId = 6;
-  // 搜索类型
-  XSearchType searchType = 5;
-  // 活动id
-  string actId = 7;
+message TMessage {
+    int32 id = 1;
+    string messageType = 2;
+    string message = 3;
+    bool isRead = 4;
+    int32 orderId = 5;
+    int32 packageId = 6;
+    string url = 7;
+    string updateDate = 8;
+    TMessageType type = 9;
+    TReadyToShipGroup readyToShipGroup = 10;
+    int64 newOrderId = 11;    // 新订单号
+    string subPackageNumber = 12; // 二级包裹号
+    string actionType = 13; //
+    PendingReplyDetail  detail  = 14;
 }
 
-enum XSearchType {
-  // 默认搜索来源, ShopHome等
-  XSearchTypeNormal = 0;
-  // PrimeHome
-  XSearchTypePrime = 1;
-  // 卖家店铺, 未实现
-  XSearchTypeSeller = 2;
-  // 通过 profileId 搜索
-  XSearchTypeProfile = 3;
+message PendingReplyDetail {
+    int64 newOrderItemId = 1;
+    TServiceType ServiceType = 2;
 }
 
-// 列表
-message XList {
-  // 商品总数
-  int32 total = 1;
-  repeated XProductGrid products = 2;
+
+message UserDeleteMessagesRequest {
+    repeated int32 messageIDs = 1;
 }
 
-message XProductGrid {
-  // 如果是商品则展示商品
-  XProduct product = 1;
-
+message UserGetMessagesRequest {
+    int32 offset = 1;
+    int32 limit = 2;
 }
 
-message XProduct {
-  int64 gpid = 1;
-  // spu 的 gpid, 可能和 gpid 一致
-  int64 baseGpid = 2;
-  // 商品展示的名字
-  string name = 3;
-  // 标类行业展示的名字, 可能为空
-  string shortName = 4;
-  // 原商品的名称
-  string originName = 5;
-  // 图片
-  string img = 6;
-  // 标题前的icon
+message UserGetUnreadMessageCountRequest {
+}
 
+message UserSetAllMessagesReadRequest {
+}
+
+message UserSetMessageReadRequest {
+    int32 messageId = 1;
+}
+
+message UserSetMessagesReadRequest {
+    repeated int32 messageIDs = 1;
+}
+
+message UserDeleteMessagesResponse {
+    bool Result = 1;
+}
+
+message UserGetMessagesResponse {
+    repeated TMessage Result = 1;
+}
+
+message UserGetUnreadMessageCountResponse {
+    int32 Result = 1;
+}
+
+message UserSetAllMessagesReadResponse {
+    bool Result = 1;
+}
+
+message UserSetMessageReadResponse {
+}
+
+message UserSetMessagesReadResponse {
+}
+
+service CustomerMessage {
+    rpc UserDeleteMessages(UserDeleteMessagesRequest) returns (UserDeleteMessagesResponse);
+    rpc UserGetMessages(UserGetMessagesRequest) returns (UserGetMessagesResponse);
+    rpc UserGetUnreadMessageCount(UserGetUnreadMessageCountRequest) returns (UserGetUnreadMessageCountResponse);
+    rpc UserSetAllMessagesRead(UserSetAllMessagesReadRequest) returns (UserSetAllMessagesReadResponse);
+    rpc UserSetMessageRead(UserSetMessageReadRequest) returns (UserSetMessageReadResponse);
+    rpc UserSetMessagesRead(UserSetMessagesReadRequest) returns (UserSetMessagesReadResponse);
 }
