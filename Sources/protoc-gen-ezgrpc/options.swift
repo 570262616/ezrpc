@@ -57,6 +57,7 @@ final class GeneratorOptions {
   private(set) var protoToModuleMappings = ProtoFileToModuleMappings()
   private(set) var fileNaming = FileNaming.FullPath
   private(set) var extraModuleImports: [String] = []
+  private(set) var excludeExtesion: Set<String> = Set()
 
   init(parameter: String?) throws {
     for pair in GeneratorOptions.parseParameter(string: parameter) {
@@ -106,6 +107,12 @@ final class GeneratorOptions {
         } else {
           throw GenerationError.invalidParameterValue(name: pair.key, value: pair.value)
         }
+      case "ExcludeExtesion":
+        if !pair.value.isEmpty {
+            excludeExtesion.insert(pair.value)
+          } else {
+            throw GenerationError.invalidParameterValue(name: pair.key, value: pair.value)
+          }
 
       default:
         throw GenerationError.unknownParameter(name: pair.key)

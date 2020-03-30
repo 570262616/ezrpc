@@ -104,7 +104,10 @@ func main() throws {
 
   // We need to generate conformance to `GRPCPayload` for request/response types. Track which
   // types we've seen to avoid generating the conformance multiple times.
-  var observedMessages = Set<String>()
+    let excludeExtesion = options.excludeExtesion
+    
+  var observedMessages = excludeExtesion
+    
 
   // process each .proto file in filename order in an attempt to stabilise the output (i.e. where
   // conformance to `GRPCPayload` is generated)

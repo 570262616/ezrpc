@@ -7,6 +7,8 @@ option java_package = "com.daigou.sg.rpc.message";
 
 option swift_prefix = "UMC";
 
+import "EchoModel/common.proto";
+
 // from ReadyToShip.proto
 message TReadyToShipGroup {
     int32 itemsCount = 1;
@@ -111,6 +113,7 @@ message UserSetMessageReadResponse {
 message UserSetMessagesReadResponse {
 }
 
+
 service CustomerMessage {
     rpc UserDeleteMessages(UserDeleteMessagesRequest) returns (UserDeleteMessagesResponse);
     rpc UserGetMessages(UserGetMessagesRequest) returns (UserGetMessagesResponse);
@@ -118,4 +121,5 @@ service CustomerMessage {
     rpc UserSetAllMessagesRead(UserSetAllMessagesReadRequest) returns (UserSetAllMessagesReadResponse);
     rpc UserSetMessageRead(UserSetMessageReadRequest) returns (UserSetMessageReadResponse);
     rpc UserSetMessagesRead(UserSetMessagesReadRequest) returns (UserSetMessagesReadResponse);
+    rpc Test(UserSetMessagesReadRequest) returns (common.Empty);
 }

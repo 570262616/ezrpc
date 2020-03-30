@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package common;
+
+option swift_prefix = "CO";
+
+//message ResultResp {
+//    string res = 1;
+//}
+
+message Empty {
+    string i = 1;
+}

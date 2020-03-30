@@ -185,6 +185,32 @@ public final class UMCCustomerMessageClient {
     return true
   }
 
+  /// Asynchronous unary call to Test.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Test.
+  ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  @discardableResult
+  public static func Test(request: UMCUserSetMessagesReadRequest, completion: @escaping (COEmpty) -> Void, failure: @escaping (Error) -> Void) -> Bool {
+    guard let grpcEngine = grpcEngine  else { return false }
+    let client = grpcEngine.client
+    let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/Test",
+                              request: request,
+                              callOptions: client.defaultCallOptions, responseType: COEmpty.self)
+    call.response.whenComplete { (result) in
+       switch result {
+           case .success(let resp):
+               debugPrint("/usermsgcenter.CustomerMessage/Test resp:", resp)
+               DispatchQueue.main.async { completion(resp) }
+           case .failure(let error):
+               debugPrint("/usermsgcenter.CustomerMessage/Test error", error)
+               DispatchQueue.main.async { failure(error) }
+       }
+    }
+    return true
+  }
+
 }
 
 
