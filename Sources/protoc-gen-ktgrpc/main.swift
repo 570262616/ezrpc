@@ -62,7 +62,7 @@ enum FileNaming: String {
 }
 
 func outputFileName(component: String, fileDescriptor: FileDescriptor, fileNamingOption: FileNaming) -> String {
-  let ext = "." + component + ".kt"
+  let ext = "" + component + ".kt"
   let pathParts = splitPath(pathname: fileDescriptor.name)
   switch fileNamingOption {
   case .FullPath:
@@ -72,14 +72,17 @@ func outputFileName(component: String, fileDescriptor: FileDescriptor, fileNamin
       pathParts.dir.replacingOccurrences(of: "/", with: "_")
     return dirWithUnderscores + pathParts.base + ext
   case .DropPath:
-    return pathParts.base + ext
+    
+    let fileName = pathParts.base + ext
+    return fileName.prefix(1).uppercased() + fileName.dropFirst()
   }
 }
 
 var generatedFiles: [String: Int] = [:]
 
 func uniqueOutputFileName(component: String, fileDescriptor: FileDescriptor, fileNamingOption: FileNaming) -> String {
-  let defaultName = outputFileName(component: component, fileDescriptor: fileDescriptor, fileNamingOption: fileNamingOption)
+    let defaultName = outputFileName(component: component, fileDescriptor: fileDescriptor, fileNamingOption: fileNamingOption)
+    
   if let count = generatedFiles[defaultName] {
     generatedFiles[defaultName] = count + 1
     return outputFileName(component: "\(count)." + component, fileDescriptor: fileDescriptor, fileNamingOption: fileNamingOption)
@@ -113,7 +116,7 @@ func main() throws {
   // conformance to `GRPCPayload` is generated)
   for fileDescriptor in descriptorSet.files.sorted(by: { $0.name < $1.name }) {
     if fileDescriptor.services.count > 0 {
-      let grpcFileName = uniqueOutputFileName(component: "client.pb", fileDescriptor: fileDescriptor, fileNamingOption: options.fileNaming)
+        let grpcFileName = uniqueOutputFileName(component: "Client", fileDescriptor: fileDescriptor, fileNamingOption: options.fileNaming)
       let grpcGenerator = Generator(fileDescriptor, options: options, observedMessages: observedMessages)
       var grpcFile = Google_Protobuf_Compiler_CodeGeneratorResponse.File()
       grpcFile.name = grpcFileName

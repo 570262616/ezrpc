@@ -55,7 +55,7 @@ final class GeneratorOptions {
   private(set) var generateServer = true
   private(set) var generateClient = true
   private(set) var protoToModuleMappings = ProtoFileToModuleMappings()
-  private(set) var fileNaming = FileNaming.FullPath
+  private(set) var fileNaming = FileNaming.DropPath
   private(set) var extraModuleImports: [String] = []
   private(set) var excludeExtesion: Set<String> = Set()
 
