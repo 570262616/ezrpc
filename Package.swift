@@ -14,6 +14,9 @@ let package = Package(
         .executable(
             name: "protoc-gen-ezgrpc",
             targets: ["protoc-gen-ezgrpc"]),
+        .executable(
+            name: "protoc-gen-ktgrpc",
+            targets: ["protoc-gen-ktgrpc"]),
         
     ],
     dependencies: [
@@ -31,6 +34,15 @@ let package = Package(
                 "protoc-gen-swift"
             ],
             path: "Sources/protoc-gen-ezgrpc"
+        ),
+        .target(
+            name: "protoc-gen-ktgrpc",
+            dependencies: [
+                "SwiftProtobuf",
+                "SwiftProtobufPluginLibrary",
+                "protoc-gen-swift"
+            ],
+            path: "Sources/protoc-gen-ktgrpc"
         ),
         // Model for the HelloWorld example
         .target(

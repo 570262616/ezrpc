@@ -27,7 +27,7 @@ import NIOHTTP1
 import SwiftProtobuf
 
 
-public final class UMCCustomerMessageClient {
+object UMCCustomerMessageClient {
 
   /// Asynchronous unary call to UserDeleteMessages.
   ///
@@ -35,24 +35,18 @@ public final class UMCCustomerMessageClient {
   ///   - request: Request to send to UserDeleteMessages.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  @discardableResult
-  public static func UserDeleteMessages(request: UMCUserDeleteMessagesRequest, completion: @escaping (UMCUserDeleteMessagesResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
-    guard let grpcEngine = grpcEngine  else { return false }
-    let client = grpcEngine.client
-    let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserDeleteMessages",
-                              request: request,
-                              callOptions: client.defaultCallOptions, responseType: UMCUserDeleteMessagesResponse.self)
-    call.response.whenComplete { (result) in
-       switch result {
-           case .success(let resp):
-               debugPrint("/usermsgcenter.CustomerMessage/UserDeleteMessages resp:", resp)
-               DispatchQueue.main.async { completion(resp) }
-           case .failure(let error):
-               debugPrint("/usermsgcenter.CustomerMessage/UserDeleteMessages error", error)
-               DispatchQueue.main.async { failure(error) }
-       }
-    }
-    return true
+  fun UserDeleteMessages(request: UMCUserDeleteMessagesRequest}, listener: EzbuyStreamObserver<UMCUserDeleteMessagesResponse>) {
+    val channel = TGrpc.getInstance().channel
+    val callOptions = TGrpc.getInstance().callOptions
+    val methodName = "/usermsgcenter.CustomerMessage/UserDeleteMessages
+
+
+    val methodDescriptor = MethodDescriptor.create(MethodType.UNARY, MethodDescriptor.generateFullMethodName("/usermsgcenter.CustomerMessage/UserDeleteMessages",
+                              ProtoLiteUtils.marshaller(UMCUserDeleteMessagesRequest.getDefaultInstance()), ProtoLiteUtils.marshaller(UMCUserDeleteMessagesResponse.getDefaultInstance()))
+
+    ClientCalls.asyncUnaryCall<UMCUserDeleteMessagesRequest,
+    UMCUserDeleteMessagesResponse>(channel.newCall(methodDescriptor, callOptions), request, listener)
+
   }
 
   /// Asynchronous unary call to UserGetMessages.
@@ -61,24 +55,18 @@ public final class UMCCustomerMessageClient {
   ///   - request: Request to send to UserGetMessages.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  @discardableResult
-  public static func UserGetMessages(request: UMCUserGetMessagesRequest, completion: @escaping (UMCUserGetMessagesResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
-    guard let grpcEngine = grpcEngine  else { return false }
-    let client = grpcEngine.client
-    let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserGetMessages",
-                              request: request,
-                              callOptions: client.defaultCallOptions, responseType: UMCUserGetMessagesResponse.self)
-    call.response.whenComplete { (result) in
-       switch result {
-           case .success(let resp):
-               debugPrint("/usermsgcenter.CustomerMessage/UserGetMessages resp:", resp)
-               DispatchQueue.main.async { completion(resp) }
-           case .failure(let error):
-               debugPrint("/usermsgcenter.CustomerMessage/UserGetMessages error", error)
-               DispatchQueue.main.async { failure(error) }
-       }
-    }
-    return true
+  fun UserGetMessages(request: UMCUserGetMessagesRequest}, listener: EzbuyStreamObserver<UMCUserGetMessagesResponse>) {
+    val channel = TGrpc.getInstance().channel
+    val callOptions = TGrpc.getInstance().callOptions
+    val methodName = "/usermsgcenter.CustomerMessage/UserGetMessages
+
+
+    val methodDescriptor = MethodDescriptor.create(MethodType.UNARY, MethodDescriptor.generateFullMethodName("/usermsgcenter.CustomerMessage/UserGetMessages",
+                              ProtoLiteUtils.marshaller(UMCUserGetMessagesRequest.getDefaultInstance()), ProtoLiteUtils.marshaller(UMCUserGetMessagesResponse.getDefaultInstance()))
+
+    ClientCalls.asyncUnaryCall<UMCUserGetMessagesRequest,
+    UMCUserGetMessagesResponse>(channel.newCall(methodDescriptor, callOptions), request, listener)
+
   }
 
   /// Asynchronous unary call to UserGetUnreadMessageCount.
@@ -87,24 +75,18 @@ public final class UMCCustomerMessageClient {
   ///   - request: Request to send to UserGetUnreadMessageCount.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  @discardableResult
-  public static func UserGetUnreadMessageCount(request: UMCUserGetUnreadMessageCountRequest, completion: @escaping (UMCUserGetUnreadMessageCountResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
-    guard let grpcEngine = grpcEngine  else { return false }
-    let client = grpcEngine.client
-    let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserGetUnreadMessageCount",
-                              request: request,
-                              callOptions: client.defaultCallOptions, responseType: UMCUserGetUnreadMessageCountResponse.self)
-    call.response.whenComplete { (result) in
-       switch result {
-           case .success(let resp):
-               debugPrint("/usermsgcenter.CustomerMessage/UserGetUnreadMessageCount resp:", resp)
-               DispatchQueue.main.async { completion(resp) }
-           case .failure(let error):
-               debugPrint("/usermsgcenter.CustomerMessage/UserGetUnreadMessageCount error", error)
-               DispatchQueue.main.async { failure(error) }
-       }
-    }
-    return true
+  fun UserGetUnreadMessageCount(request: UMCUserGetUnreadMessageCountRequest}, listener: EzbuyStreamObserver<UMCUserGetUnreadMessageCountResponse>) {
+    val channel = TGrpc.getInstance().channel
+    val callOptions = TGrpc.getInstance().callOptions
+    val methodName = "/usermsgcenter.CustomerMessage/UserGetUnreadMessageCount
+
+
+    val methodDescriptor = MethodDescriptor.create(MethodType.UNARY, MethodDescriptor.generateFullMethodName("/usermsgcenter.CustomerMessage/UserGetUnreadMessageCount",
+                              ProtoLiteUtils.marshaller(UMCUserGetUnreadMessageCountRequest.getDefaultInstance()), ProtoLiteUtils.marshaller(UMCUserGetUnreadMessageCountResponse.getDefaultInstance()))
+
+    ClientCalls.asyncUnaryCall<UMCUserGetUnreadMessageCountRequest,
+    UMCUserGetUnreadMessageCountResponse>(channel.newCall(methodDescriptor, callOptions), request, listener)
+
   }
 
   /// Asynchronous unary call to UserSetAllMessagesRead.
@@ -113,24 +95,18 @@ public final class UMCCustomerMessageClient {
   ///   - request: Request to send to UserSetAllMessagesRead.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  @discardableResult
-  public static func UserSetAllMessagesRead(request: UMCUserSetAllMessagesReadRequest, completion: @escaping (UMCUserSetAllMessagesReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
-    guard let grpcEngine = grpcEngine  else { return false }
-    let client = grpcEngine.client
-    let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserSetAllMessagesRead",
-                              request: request,
-                              callOptions: client.defaultCallOptions, responseType: UMCUserSetAllMessagesReadResponse.self)
-    call.response.whenComplete { (result) in
-       switch result {
-           case .success(let resp):
-               debugPrint("/usermsgcenter.CustomerMessage/UserSetAllMessagesRead resp:", resp)
-               DispatchQueue.main.async { completion(resp) }
-           case .failure(let error):
-               debugPrint("/usermsgcenter.CustomerMessage/UserSetAllMessagesRead error", error)
-               DispatchQueue.main.async { failure(error) }
-       }
-    }
-    return true
+  fun UserSetAllMessagesRead(request: UMCUserSetAllMessagesReadRequest}, listener: EzbuyStreamObserver<UMCUserSetAllMessagesReadResponse>) {
+    val channel = TGrpc.getInstance().channel
+    val callOptions = TGrpc.getInstance().callOptions
+    val methodName = "/usermsgcenter.CustomerMessage/UserSetAllMessagesRead
+
+
+    val methodDescriptor = MethodDescriptor.create(MethodType.UNARY, MethodDescriptor.generateFullMethodName("/usermsgcenter.CustomerMessage/UserSetAllMessagesRead",
+                              ProtoLiteUtils.marshaller(UMCUserSetAllMessagesReadRequest.getDefaultInstance()), ProtoLiteUtils.marshaller(UMCUserSetAllMessagesReadResponse.getDefaultInstance()))
+
+    ClientCalls.asyncUnaryCall<UMCUserSetAllMessagesReadRequest,
+    UMCUserSetAllMessagesReadResponse>(channel.newCall(methodDescriptor, callOptions), request, listener)
+
   }
 
   /// Asynchronous unary call to UserSetMessageRead.
@@ -139,24 +115,18 @@ public final class UMCCustomerMessageClient {
   ///   - request: Request to send to UserSetMessageRead.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  @discardableResult
-  public static func UserSetMessageRead(request: UMCUserSetMessageReadRequest, completion: @escaping (UMCUserSetMessageReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
-    guard let grpcEngine = grpcEngine  else { return false }
-    let client = grpcEngine.client
-    let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserSetMessageRead",
-                              request: request,
-                              callOptions: client.defaultCallOptions, responseType: UMCUserSetMessageReadResponse.self)
-    call.response.whenComplete { (result) in
-       switch result {
-           case .success(let resp):
-               debugPrint("/usermsgcenter.CustomerMessage/UserSetMessageRead resp:", resp)
-               DispatchQueue.main.async { completion(resp) }
-           case .failure(let error):
-               debugPrint("/usermsgcenter.CustomerMessage/UserSetMessageRead error", error)
-               DispatchQueue.main.async { failure(error) }
-       }
-    }
-    return true
+  fun UserSetMessageRead(request: UMCUserSetMessageReadRequest}, listener: EzbuyStreamObserver<UMCUserSetMessageReadResponse>) {
+    val channel = TGrpc.getInstance().channel
+    val callOptions = TGrpc.getInstance().callOptions
+    val methodName = "/usermsgcenter.CustomerMessage/UserSetMessageRead
+
+
+    val methodDescriptor = MethodDescriptor.create(MethodType.UNARY, MethodDescriptor.generateFullMethodName("/usermsgcenter.CustomerMessage/UserSetMessageRead",
+                              ProtoLiteUtils.marshaller(UMCUserSetMessageReadRequest.getDefaultInstance()), ProtoLiteUtils.marshaller(UMCUserSetMessageReadResponse.getDefaultInstance()))
+
+    ClientCalls.asyncUnaryCall<UMCUserSetMessageReadRequest,
+    UMCUserSetMessageReadResponse>(channel.newCall(methodDescriptor, callOptions), request, listener)
+
   }
 
   /// Asynchronous unary call to UserSetMessagesRead.
@@ -165,24 +135,18 @@ public final class UMCCustomerMessageClient {
   ///   - request: Request to send to UserSetMessagesRead.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  @discardableResult
-  public static func UserSetMessagesRead(request: UMCUserSetMessagesReadRequest, completion: @escaping (UMCUserSetMessagesReadResponse) -> Void, failure: @escaping (Error) -> Void) -> Bool {
-    guard let grpcEngine = grpcEngine  else { return false }
-    let client = grpcEngine.client
-    let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/UserSetMessagesRead",
-                              request: request,
-                              callOptions: client.defaultCallOptions, responseType: UMCUserSetMessagesReadResponse.self)
-    call.response.whenComplete { (result) in
-       switch result {
-           case .success(let resp):
-               debugPrint("/usermsgcenter.CustomerMessage/UserSetMessagesRead resp:", resp)
-               DispatchQueue.main.async { completion(resp) }
-           case .failure(let error):
-               debugPrint("/usermsgcenter.CustomerMessage/UserSetMessagesRead error", error)
-               DispatchQueue.main.async { failure(error) }
-       }
-    }
-    return true
+  fun UserSetMessagesRead(request: UMCUserSetMessagesReadRequest}, listener: EzbuyStreamObserver<UMCUserSetMessagesReadResponse>) {
+    val channel = TGrpc.getInstance().channel
+    val callOptions = TGrpc.getInstance().callOptions
+    val methodName = "/usermsgcenter.CustomerMessage/UserSetMessagesRead
+
+
+    val methodDescriptor = MethodDescriptor.create(MethodType.UNARY, MethodDescriptor.generateFullMethodName("/usermsgcenter.CustomerMessage/UserSetMessagesRead",
+                              ProtoLiteUtils.marshaller(UMCUserSetMessagesReadRequest.getDefaultInstance()), ProtoLiteUtils.marshaller(UMCUserSetMessagesReadResponse.getDefaultInstance()))
+
+    ClientCalls.asyncUnaryCall<UMCUserSetMessagesReadRequest,
+    UMCUserSetMessagesReadResponse>(channel.newCall(methodDescriptor, callOptions), request, listener)
+
   }
 
   /// Asynchronous unary call to Test.
@@ -191,24 +155,18 @@ public final class UMCCustomerMessageClient {
   ///   - request: Request to send to Test.
   ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  @discardableResult
-  public static func Test(request: UMCUserSetMessagesReadRequest, completion: @escaping (COEmpty) -> Void, failure: @escaping (Error) -> Void) -> Bool {
-    guard let grpcEngine = grpcEngine  else { return false }
-    let client = grpcEngine.client
-    let call = client.makeUnaryCall(path: "/usermsgcenter.CustomerMessage/Test",
-                              request: request,
-                              callOptions: client.defaultCallOptions, responseType: COEmpty.self)
-    call.response.whenComplete { (result) in
-       switch result {
-           case .success(let resp):
-               debugPrint("/usermsgcenter.CustomerMessage/Test resp:", resp)
-               DispatchQueue.main.async { completion(resp) }
-           case .failure(let error):
-               debugPrint("/usermsgcenter.CustomerMessage/Test error", error)
-               DispatchQueue.main.async { failure(error) }
-       }
-    }
-    return true
+  fun Test(request: UMCUserSetMessagesReadRequest}, listener: EzbuyStreamObserver<COEmpty>) {
+    val channel = TGrpc.getInstance().channel
+    val callOptions = TGrpc.getInstance().callOptions
+    val methodName = "/usermsgcenter.CustomerMessage/Test
+
+
+    val methodDescriptor = MethodDescriptor.create(MethodType.UNARY, MethodDescriptor.generateFullMethodName("/usermsgcenter.CustomerMessage/Test",
+                              ProtoLiteUtils.marshaller(UMCUserSetMessagesReadRequest.getDefaultInstance()), ProtoLiteUtils.marshaller(COEmpty.getDefaultInstance()))
+
+    ClientCalls.asyncUnaryCall<UMCUserSetMessagesReadRequest,
+    COEmpty>(channel.newCall(methodDescriptor, callOptions), request, listener)
+
   }
 
 }

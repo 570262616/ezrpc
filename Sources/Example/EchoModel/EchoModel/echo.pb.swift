@@ -20,8 +20,8 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// from Common.proto
-public enum GETServiceType: SwiftProtobuf.Enum {
-  public typealias RawValue = Int
+enum GETServiceType: SwiftProtobuf.Enum {
+  typealias RawValue = Int
   case other // = 0
   case buy4Me // = 1
   case ship4Me // = 2
@@ -29,11 +29,11 @@ public enum GETServiceType: SwiftProtobuf.Enum {
   case prime // = 4
   case UNRECOGNIZED(Int)
 
-  public init() {
+  init() {
     self = .other
   }
 
-  public init?(rawValue: Int) {
+  init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .other
     case 1: self = .buy4Me
@@ -44,7 +44,7 @@ public enum GETServiceType: SwiftProtobuf.Enum {
     }
   }
 
-  public var rawValue: Int {
+  var rawValue: Int {
     switch self {
     case .other: return 0
     case .buy4Me: return 1
@@ -61,7 +61,7 @@ public enum GETServiceType: SwiftProtobuf.Enum {
 
 extension GETServiceType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [GETServiceType] = [
+  static var allCases: [GETServiceType] = [
     .other,
     .buy4Me,
     .ship4Me,
@@ -72,8 +72,8 @@ extension GETServiceType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
-public enum GETMessageType: SwiftProtobuf.Enum {
-  public typealias RawValue = Int
+enum GETMessageType: SwiftProtobuf.Enum {
+  typealias RawValue = Int
   case normal // = 0
   case orderPending // = 1
   case orderArrived // = 2
@@ -84,11 +84,11 @@ public enum GETMessageType: SwiftProtobuf.Enum {
   case firebaseCallback // = 7
   case UNRECOGNIZED(Int)
 
-  public init() {
+  init() {
     self = .normal
   }
 
-  public init?(rawValue: Int) {
+  init?(rawValue: Int) {
     switch rawValue {
     case 0: self = .normal
     case 1: self = .orderPending
@@ -102,7 +102,7 @@ public enum GETMessageType: SwiftProtobuf.Enum {
     }
   }
 
-  public var rawValue: Int {
+  var rawValue: Int {
     switch self {
     case .normal: return 0
     case .orderPending: return 1
@@ -122,7 +122,7 @@ public enum GETMessageType: SwiftProtobuf.Enum {
 
 extension GETMessageType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [GETMessageType] = [
+  static var allCases: [GETMessageType] = [
     .normal,
     .orderPending,
     .orderArrived,
@@ -137,247 +137,247 @@ extension GETMessageType: CaseIterable {
 #endif  // swift(>=4.2)
 
 /// from ReadyToShip.proto
-public struct GETReadyToShipGroup {
+struct GETReadyToShipGroup {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var itemsCount: Int32 = 0
+  var itemsCount: Int32 = 0
 
-  public var serviceType: GETServiceType = .other
+  var serviceType: GETServiceType = .other
 
-  public var warehouseCode: String = String()
+  var warehouseCode: String = String()
 
-  public var shippingMethodCode: String = String()
+  var shippingMethodCode: String = String()
 
-  public var shippingMethodName: String = String()
+  var shippingMethodName: String = String()
 
-  public var itemsPics: [String] = []
+  var itemsPics: [String] = []
 
-  public var status: String = String()
+  var status: String = String()
 
-  public var freeStorageDays: Int32 = 0
+  var freeStorageDays: Int32 = 0
 
-  public var chargedStorageDays: Int32 = 0
+  var chargedStorageDays: Int32 = 0
 
-  public var storageFee: Double = 0
+  var storageFee: Double = 0
 
-  public var notArrivedItemCount: Int32 = 0
+  var notArrivedItemCount: Int32 = 0
 
-  public var shippingMethodID: Int64 = 0
+  var shippingMethodID: Int64 = 0
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GETMessage {
+struct GETMessage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var id: Int32 = 0
+  var id: Int32 = 0
 
-  public var messageType: String = String()
+  var messageType: String = String()
 
-  public var message: String = String()
+  var message: String = String()
 
-  public var isRead: Bool = false
+  var isRead: Bool = false
 
-  public var orderID: Int32 = 0
+  var orderID: Int32 = 0
 
-  public var packageID: Int32 = 0
+  var packageID: Int32 = 0
 
-  public var url: String = String()
+  var url: String = String()
 
-  public var updateDate: String = String()
+  var updateDate: String = String()
 
-  public var type: GETMessageType = .normal
+  var type: GETMessageType = .normal
 
-  public var readyToShipGroup: GETReadyToShipGroup {
+  var readyToShipGroup: GETReadyToShipGroup {
     get {return _readyToShipGroup ?? GETReadyToShipGroup()}
     set {_readyToShipGroup = newValue}
   }
   /// Returns true if `readyToShipGroup` has been explicitly set.
-  public var hasReadyToShipGroup: Bool {return self._readyToShipGroup != nil}
+  var hasReadyToShipGroup: Bool {return self._readyToShipGroup != nil}
   /// Clears the value of `readyToShipGroup`. Subsequent reads from it will return its default value.
-  public mutating func clearReadyToShipGroup() {self._readyToShipGroup = nil}
+  mutating func clearReadyToShipGroup() {self._readyToShipGroup = nil}
 
   /// 新订单号
-  public var newOrderID: Int64 = 0
+  var newOrderID: Int64 = 0
 
   /// 二级包裹号
-  public var subPackageNumber: String = String()
+  var subPackageNumber: String = String()
 
-  public var actionType: String = String()
+  var actionType: String = String()
 
-  public var detail: GEPendingReplyDetail {
+  var detail: GEPendingReplyDetail {
     get {return _detail ?? GEPendingReplyDetail()}
     set {_detail = newValue}
   }
   /// Returns true if `detail` has been explicitly set.
-  public var hasDetail: Bool {return self._detail != nil}
+  var hasDetail: Bool {return self._detail != nil}
   /// Clears the value of `detail`. Subsequent reads from it will return its default value.
-  public mutating func clearDetail() {self._detail = nil}
+  mutating func clearDetail() {self._detail = nil}
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 
   fileprivate var _readyToShipGroup: GETReadyToShipGroup? = nil
   fileprivate var _detail: GEPendingReplyDetail? = nil
 }
 
-public struct GEPendingReplyDetail {
+struct GEPendingReplyDetail {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var newOrderItemID: Int64 = 0
+  var newOrderItemID: Int64 = 0
 
-  public var serviceType: GETServiceType = .other
+  var serviceType: GETServiceType = .other
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserDeleteMessagesRequest {
+struct GEUserDeleteMessagesRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var messageIds: [Int32] = []
+  var messageIds: [Int32] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserGetMessagesRequest {
+struct GEUserGetMessagesRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var offset: Int32 = 0
+  var offset: Int32 = 0
 
-  public var limit: Int32 = 0
+  var limit: Int32 = 0
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserGetUnreadMessageCountRequest {
+struct GEUserGetUnreadMessageCountRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserSetAllMessagesReadRequest {
+struct GEUserSetAllMessagesReadRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserSetMessageReadRequest {
+struct GEUserSetMessageReadRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var messageID: Int32 = 0
+  var messageID: Int32 = 0
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserSetMessagesReadRequest {
+struct GEUserSetMessagesReadRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var messageIds: [Int32] = []
+  var messageIds: [Int32] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserDeleteMessagesResponse {
+struct GEUserDeleteMessagesResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var result: Bool = false
+  var result: Bool = false
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserGetMessagesResponse {
+struct GEUserGetMessagesResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var result: [GETMessage] = []
+  var result: [GETMessage] = []
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserGetUnreadMessageCountResponse {
+struct GEUserGetUnreadMessageCountResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var result: Int32 = 0
+  var result: Int32 = 0
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserSetAllMessagesReadResponse {
+struct GEUserSetAllMessagesReadResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var result: Bool = false
+  var result: Bool = false
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserSetMessageReadResponse {
+struct GEUserSetMessageReadResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
-public struct GEUserSetMessagesReadResponse {
+struct GEUserSetMessagesReadResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
+  var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  init() {}
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -385,7 +385,7 @@ public struct GEUserSetMessagesReadResponse {
 fileprivate let _protobuf_package = "usermsgcenter"
 
 extension GETServiceType: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "TServiceTypeOther"),
     1: .same(proto: "TServiceTypeBuy4Me"),
     2: .same(proto: "TServiceTypeShip4Me"),
@@ -395,7 +395,7 @@ extension GETServiceType: SwiftProtobuf._ProtoNameProviding {
 }
 
 extension GETMessageType: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "TMessageTypeNormal"),
     1: .same(proto: "TMessageTypeOrderPending"),
     2: .same(proto: "TMessageTypeOrderArrived"),
@@ -408,8 +408,8 @@ extension GETMessageType: SwiftProtobuf._ProtoNameProviding {
 }
 
 extension GETReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".TReadyToShipGroup"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".TReadyToShipGroup"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "itemsCount"),
     2: .same(proto: "serviceType"),
     3: .same(proto: "warehouseCode"),
@@ -424,7 +424,7 @@ extension GETReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     12: .same(proto: "shippingMethodId"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularInt32Field(value: &self.itemsCount)
@@ -444,7 +444,7 @@ extension GETReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.itemsCount != 0 {
       try visitor.visitSingularInt32Field(value: self.itemsCount, fieldNumber: 1)
     }
@@ -484,7 +484,7 @@ extension GETReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GETReadyToShipGroup, rhs: GETReadyToShipGroup) -> Bool {
+  static func ==(lhs: GETReadyToShipGroup, rhs: GETReadyToShipGroup) -> Bool {
     if lhs.itemsCount != rhs.itemsCount {return false}
     if lhs.serviceType != rhs.serviceType {return false}
     if lhs.warehouseCode != rhs.warehouseCode {return false}
@@ -503,8 +503,8 @@ extension GETReadyToShipGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 }
 
 extension GETMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".TMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".TMessage"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "messageType"),
     3: .same(proto: "message"),
@@ -521,7 +521,7 @@ extension GETMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     14: .same(proto: "detail"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularInt32Field(value: &self.id)
@@ -543,7 +543,7 @@ extension GETMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.id != 0 {
       try visitor.visitSingularInt32Field(value: self.id, fieldNumber: 1)
     }
@@ -589,7 +589,7 @@ extension GETMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GETMessage, rhs: GETMessage) -> Bool {
+  static func ==(lhs: GETMessage, rhs: GETMessage) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.messageType != rhs.messageType {return false}
     if lhs.message != rhs.message {return false}
@@ -610,13 +610,13 @@ extension GETMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
 }
 
 extension GEPendingReplyDetail: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".PendingReplyDetail"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".PendingReplyDetail"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "newOrderItemId"),
     2: .same(proto: "ServiceType"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularInt64Field(value: &self.newOrderItemID)
@@ -626,7 +626,7 @@ extension GEPendingReplyDetail: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.newOrderItemID != 0 {
       try visitor.visitSingularInt64Field(value: self.newOrderItemID, fieldNumber: 1)
     }
@@ -636,7 +636,7 @@ extension GEPendingReplyDetail: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEPendingReplyDetail, rhs: GEPendingReplyDetail) -> Bool {
+  static func ==(lhs: GEPendingReplyDetail, rhs: GEPendingReplyDetail) -> Bool {
     if lhs.newOrderItemID != rhs.newOrderItemID {return false}
     if lhs.serviceType != rhs.serviceType {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -645,12 +645,12 @@ extension GEPendingReplyDetail: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 }
 
 extension GEUserDeleteMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserDeleteMessagesRequest"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".UserDeleteMessagesRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "messageIDs"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeRepeatedInt32Field(value: &self.messageIds)
@@ -659,14 +659,14 @@ extension GEUserDeleteMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.messageIds.isEmpty {
       try visitor.visitPackedInt32Field(value: self.messageIds, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserDeleteMessagesRequest, rhs: GEUserDeleteMessagesRequest) -> Bool {
+  static func ==(lhs: GEUserDeleteMessagesRequest, rhs: GEUserDeleteMessagesRequest) -> Bool {
     if lhs.messageIds != rhs.messageIds {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -674,13 +674,13 @@ extension GEUserDeleteMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
 }
 
 extension GEUserGetMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserGetMessagesRequest"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".UserGetMessagesRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "offset"),
     2: .same(proto: "limit"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularInt32Field(value: &self.offset)
@@ -690,7 +690,7 @@ extension GEUserGetMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.offset != 0 {
       try visitor.visitSingularInt32Field(value: self.offset, fieldNumber: 1)
     }
@@ -700,7 +700,7 @@ extension GEUserGetMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserGetMessagesRequest, rhs: GEUserGetMessagesRequest) -> Bool {
+  static func ==(lhs: GEUserGetMessagesRequest, rhs: GEUserGetMessagesRequest) -> Bool {
     if lhs.offset != rhs.offset {return false}
     if lhs.limit != rhs.limit {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -709,50 +709,50 @@ extension GEUserGetMessagesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
 }
 
 extension GEUserGetUnreadMessageCountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserGetUnreadMessageCountRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  static let protoMessageName: String = _protobuf_package + ".UserGetUnreadMessageCountRequest"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let _ = try decoder.nextFieldNumber() {
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserGetUnreadMessageCountRequest, rhs: GEUserGetUnreadMessageCountRequest) -> Bool {
+  static func ==(lhs: GEUserGetUnreadMessageCountRequest, rhs: GEUserGetUnreadMessageCountRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
 extension GEUserSetAllMessagesReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserSetAllMessagesReadRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  static let protoMessageName: String = _protobuf_package + ".UserSetAllMessagesReadRequest"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let _ = try decoder.nextFieldNumber() {
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserSetAllMessagesReadRequest, rhs: GEUserSetAllMessagesReadRequest) -> Bool {
+  static func ==(lhs: GEUserSetAllMessagesReadRequest, rhs: GEUserSetAllMessagesReadRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
 extension GEUserSetMessageReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserSetMessageReadRequest"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".UserSetMessageReadRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "messageId"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularInt32Field(value: &self.messageID)
@@ -761,14 +761,14 @@ extension GEUserSetMessageReadRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.messageID != 0 {
       try visitor.visitSingularInt32Field(value: self.messageID, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserSetMessageReadRequest, rhs: GEUserSetMessageReadRequest) -> Bool {
+  static func ==(lhs: GEUserSetMessageReadRequest, rhs: GEUserSetMessageReadRequest) -> Bool {
     if lhs.messageID != rhs.messageID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -776,12 +776,12 @@ extension GEUserSetMessageReadRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
 }
 
 extension GEUserSetMessagesReadRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserSetMessagesReadRequest"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".UserSetMessagesReadRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "messageIDs"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeRepeatedInt32Field(value: &self.messageIds)
@@ -790,14 +790,14 @@ extension GEUserSetMessagesReadRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.messageIds.isEmpty {
       try visitor.visitPackedInt32Field(value: self.messageIds, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserSetMessagesReadRequest, rhs: GEUserSetMessagesReadRequest) -> Bool {
+  static func ==(lhs: GEUserSetMessagesReadRequest, rhs: GEUserSetMessagesReadRequest) -> Bool {
     if lhs.messageIds != rhs.messageIds {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -805,12 +805,12 @@ extension GEUserSetMessagesReadRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
 }
 
 extension GEUserDeleteMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserDeleteMessagesResponse"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".UserDeleteMessagesResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularBoolField(value: &self.result)
@@ -819,14 +819,14 @@ extension GEUserDeleteMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.result != false {
       try visitor.visitSingularBoolField(value: self.result, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserDeleteMessagesResponse, rhs: GEUserDeleteMessagesResponse) -> Bool {
+  static func ==(lhs: GEUserDeleteMessagesResponse, rhs: GEUserDeleteMessagesResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -834,12 +834,12 @@ extension GEUserDeleteMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
 }
 
 extension GEUserGetMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserGetMessagesResponse"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".UserGetMessagesResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeRepeatedMessageField(value: &self.result)
@@ -848,14 +848,14 @@ extension GEUserGetMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Messa
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.result.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.result, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserGetMessagesResponse, rhs: GEUserGetMessagesResponse) -> Bool {
+  static func ==(lhs: GEUserGetMessagesResponse, rhs: GEUserGetMessagesResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -863,12 +863,12 @@ extension GEUserGetMessagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Messa
 }
 
 extension GEUserGetUnreadMessageCountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserGetUnreadMessageCountResponse"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".UserGetUnreadMessageCountResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularInt32Field(value: &self.result)
@@ -877,14 +877,14 @@ extension GEUserGetUnreadMessageCountResponse: SwiftProtobuf.Message, SwiftProto
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.result != 0 {
       try visitor.visitSingularInt32Field(value: self.result, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserGetUnreadMessageCountResponse, rhs: GEUserGetUnreadMessageCountResponse) -> Bool {
+  static func ==(lhs: GEUserGetUnreadMessageCountResponse, rhs: GEUserGetUnreadMessageCountResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -892,12 +892,12 @@ extension GEUserGetUnreadMessageCountResponse: SwiftProtobuf.Message, SwiftProto
 }
 
 extension GEUserSetAllMessagesReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserSetAllMessagesReadResponse"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  static let protoMessageName: String = _protobuf_package + ".UserSetAllMessagesReadResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Result"),
   ]
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularBoolField(value: &self.result)
@@ -906,14 +906,14 @@ extension GEUserSetAllMessagesReadResponse: SwiftProtobuf.Message, SwiftProtobuf
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.result != false {
       try visitor.visitSingularBoolField(value: self.result, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserSetAllMessagesReadResponse, rhs: GEUserSetAllMessagesReadResponse) -> Bool {
+  static func ==(lhs: GEUserSetAllMessagesReadResponse, rhs: GEUserSetAllMessagesReadResponse) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -921,38 +921,38 @@ extension GEUserSetAllMessagesReadResponse: SwiftProtobuf.Message, SwiftProtobuf
 }
 
 extension GEUserSetMessageReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserSetMessageReadResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  static let protoMessageName: String = _protobuf_package + ".UserSetMessageReadResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let _ = try decoder.nextFieldNumber() {
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserSetMessageReadResponse, rhs: GEUserSetMessageReadResponse) -> Bool {
+  static func ==(lhs: GEUserSetMessageReadResponse, rhs: GEUserSetMessageReadResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
 extension GEUserSetMessagesReadResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".UserSetMessagesReadResponse"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  static let protoMessageName: String = _protobuf_package + ".UserSetMessagesReadResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let _ = try decoder.nextFieldNumber() {
     }
   }
 
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: GEUserSetMessagesReadResponse, rhs: GEUserSetMessagesReadResponse) -> Bool {
+  static func ==(lhs: GEUserSetMessagesReadResponse, rhs: GEUserSetMessagesReadResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

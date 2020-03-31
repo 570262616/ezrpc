@@ -4,8 +4,9 @@ package usermsgcenter;
 
 option csharp_namespace = "Zen.DataAccess.CustomerMessage";
 option java_package = "com.daigou.sg.rpc.message";
+//option java_outer_classname = "Usermsgcenter";
 
-option swift_prefix = "UMC";
+option swift_prefix = "GE";
 
 import "EchoModel/common.proto";
 
@@ -121,5 +122,5 @@ service CustomerMessage {
     rpc UserSetAllMessagesRead(UserSetAllMessagesReadRequest) returns (UserSetAllMessagesReadResponse);
     rpc UserSetMessageRead(UserSetMessageReadRequest) returns (UserSetMessageReadResponse);
     rpc UserSetMessagesRead(UserSetMessagesReadRequest) returns (UserSetMessagesReadResponse);
-    rpc Test(UserSetMessagesReadRequest) returns (common.Empty);
+    rpc Test(common.Common) returns (common.Empty);
 }
