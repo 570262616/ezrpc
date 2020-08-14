@@ -1,35 +1,34 @@
 
 
-plugins=--plugin=./Plugin/protoc-gen-ezgrpc --plugin=./Plugin/protoc-gen-swift
+swift_plugins=--plugin=./Plugin/protoc-gen-swift-grpc --plugin=./Plugin/protoc-gen-swift
+kt_plugins=--plugin=./Plugin/protoc-gen-kotlin-grpc
 
-options=--ezgrpc_opt=Visibility=Public \
---ezgrpc_opt=Client=true,Server=false \
+options=--swift-grpc_opt=Visibility=Public \
+--swift-grpc_opt=Client=true,Server=false \
 --swift_opt=Visibility=Public \
---ezgrpc_opt=FileNaming=PathToUnderscores \
+--swift-grpc_opt=FileNaming=PathToUnderscores \
 --swift_opt=FileNaming=PathToUnderscores  \
---ezgrpc_opt=ExcludeExtesion=COEmpty
 
-out=--ezgrpc_out=./Sources/Example/EchoModel --swift_out=./Sources/Example/EchoModel
+swift_out=--swift-grpc_out=./Sources/Example/EchoModel --swift_out=./Sources/Example/EchoModel
+kt_out=--kotlin-grpc_out=./Sources/Example/EchoModel
 
-kt_plugins=--plugin=./Plugin/protoc-gen-ktgrpc
+default: build-swift
 
-kt_out=--ktgrpc_out=./Sources/Example/EchoModel
-
-default:	build
-
-build:
+build-swift:
 	swift build --product protoc-gen-swift -c release
-	swift build --product protoc-gen-ezgrpc -c release
-	swift build --product protoc-gen-ktgrpc -c release
+	swift build --product protoc-gen-swift-grpc -c release
 	cp .build/release/protoc-gen-swift ./Plugin
-	cp .build/release/protoc-gen-ezgrpc ./Plugin
-	cp .build/release/protoc-gen-ktgrpc ./Plugin
+	cp .build/release/protoc-gen-swift-grpc ./Plugin
+	
+build-kotlin:
+	swift build --product rotoc-gen-kotlin-grpc -c release
+	cp .build/release/rotoc-gen-kotlin-grpc ./Plugin
 
 
 gen:
 
-	./Plugin/protoc ./Sources/Example/EchoModel/echo.proto --proto_path=./Sources/Example/ $(plugins) $(options) $(out)
-	./Plugin/protoc ./Sources/Example/EchoModel/common.proto --proto_path=./Sources/Example/ $(plugins) $(options) $(out)
+	./Plugin/protoc ./Sources/Example/EchoModel/echo.proto --proto_path=./Sources/Example/ $(swift_plugins) $(options) $(swift_out)
+	./Plugin/protoc ./Sources/Example/EchoModel/common.proto --proto_path=./Sources/Example/ $(swift_plugins) $(options) $(swift_out)
 	
 genkt:
 
@@ -49,9 +48,6 @@ install:
 
 project:
 	swift package generate-xcodeproj
-
-test-ezrpc:
-	./Plugin/ezrpc -i ./Example/echo.proto -o ./Generated -t EZBuy
 
 swift5:
 	https://download.developer.apple.com/Developer_Tools/Swift_5_Runtime_Support_for_Command_Line_Tools/Swift_5_Runtime_Support_for_Command_Line_Tools.dmg
