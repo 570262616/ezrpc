@@ -2,3 +2,8 @@
 /.build
 /Packages
 /*.xcodeproj
+*.crt
+*.xcuserstate
+*.xcuserstate
+Plugin/*
+.swiftpm/*

@@ -3,39 +3,65 @@
 
 import PackageDescription
 
+
 let package = Package(
-    name: "ezrpc",
+    name: "protoc-gen-ezgrpc",
+    platforms: [
+      // We can't use `.watchOS(.v6)` since it isn't available with `swift-tools-version:5.0`.
+      .macOS(.v10_12), .iOS(.v10), .tvOS(.v10), .watchOS("6.0")
+    ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .executable(
-            name: "ezrpc",
-            targets: ["ezrpc"]),
+            name: "protoc-gen-ezgrpc",
+            targets: ["protoc-gen-ezgrpc"]),
+        .executable(
+            name: "protoc-gen-ktgrpc",
+            targets: ["protoc-gen-ktgrpc"]),
+        
     ],
     dependencies: [
-        .package(url: "https://github.com/570262616/CommandLine.git", from: "5.0.4"),
-        .package(url: "https://github.com/kareman/SwiftShell", from: "4.0.0"),
-        .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.5.0"),
-        .package(url: "https://github.com/stencilproject/Stencil.git", from: "0.13.0"),
+        .package(url: "https://github.com/grpc/grpc-swift.git", from: "1.0.0-alpha.10"),
+        .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.7.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "ezrpc",
-            dependencies: ["CommandLine", "SwiftShell"],
-            path: "Sources/ezrpc/"
+            name: "protoc-gen-ezgrpc",
+            dependencies: [
+                "SwiftProtobuf",
+                "SwiftProtobufPluginLibrary",
+                "protoc-gen-swift"
+            ],
+            path: "Sources/protoc-gen-ezgrpc"
         ),
         .target(
-            name: "TemplateEncoder",
-            dependencies: ["Stencil", "SwiftProtobuf", "SwiftProtobufPluginLibrary", "protoc-gen-swift"],
-            path: "Sources/TemplateEncoder"),
-        .target(
-            name: "protoc-gen-swiftgrpc",
-            dependencies: ["TemplateEncoder"],
-            path: "Sources/protoc-gen-swiftgrpc"
+            name: "protoc-gen-ktgrpc",
+            dependencies: [
+                "SwiftProtobuf",
+                "SwiftProtobufPluginLibrary",
+                "protoc-gen-swift"
+            ],
+            path: "Sources/protoc-gen-ktgrpc"
         ),
-        .testTarget(
-            name: "ezrpcTests",
-            dependencies: ["ezrpc"]),
+        // Model for the HelloWorld example
+        .target(
+          name: "EchoModel",
+          dependencies: [
+            "GRPC",
+            "SwiftProtobuf"
+          ],
+          path: "Sources/Example/EchoModel/"
+        ),
+        // Client for the HelloWorld example
+        .target(
+          name: "EchoModelClient",
+          dependencies: [
+            "GRPC",
+            "EchoModel",
+          ],
+          path: "Sources/Example/EchoModelClient"
+        ),
+        
     ]
 )
