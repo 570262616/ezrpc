@@ -21,9 +21,9 @@ public func testGRPC() {
     print("Test")
 
 
-    var s = GEUserGetMessagesRequest()
-    s.limit = Int32(arc4random() % UInt32(20))
-    s.offset = 0
+//    var s = GEUserGetMessagesRequest()
+//    s.limit = Int32(arc4random() % UInt32(20))
+//    s.offset = 0
 
     
 
@@ -38,12 +38,12 @@ public func testGRPC() {
 //            .withTLS(trustRoots: .certificates(pem))
 //            .connect(host: "sg-en-ios-rpc3.65emall.net", port: 2443)
     
-    GECustomerMessageClient.UserGetMessages(request: s, completion: { (resp) in
-        
-//        print(resp)
-    }) { (error) in
-//        print(error)
-    }
+//    GECustomerMessageClient.UserGetMessages(request: s, completion: { (resp) in
+//
+////        print(resp)
+//    }) { (error) in
+////        print(error)
+//    }
 
 //    let client = GECustomerMessageClient(channel: channel, defaultCallOptions: makeOptions())
 //
@@ -60,18 +60,7 @@ public func testGRPC() {
 
 }
 
-grpcEngine = Client()
-
-for i in 0..<1000 {
-    
-    let q = DispatchQueue(label: "\(i)", qos: .userInitiated)
-    
-    q.async {
-        print(i)
-//        print(Thread.current, "Thread")
-        testGRPC()
-    }
-}
+//grpcEngine = Client()
 
 
 //extension GRAppClient {
@@ -176,7 +165,7 @@ func makeOptions() -> CallOptions {
 //    }
     var option = CallOptions(customMetadata: header)
     option.cacheable = false
-    option.timeout = GRPCTimeout.default
+//    option.timeout = GRPCTimeout.default
     
     return option
 }
@@ -207,50 +196,20 @@ func makeChannel() -> GRPCChannel {
     return channel
 }
 
-class Client: GRPCEngine {
-
-    var client: GRPCClient
-    
-    var isUAT: Bool { return false }
-    
-    init() {
-        self.client = C.init(channel: makeChannel(), defaultCallOptions: makeOptions())
-    }
-}
-
-class C: NSObject, GRPCClient {
-    
-    public let channel: GRPCChannel
-    public var defaultCallOptions: CallOptions
-
-    /// Creates a client which may be used to call any service.
-    ///
-    /// - Parameters:
-    ///   - connection: `ClientConnection` to the service host.
-    ///   - defaultCallOptions: Options to use for each service call if the user doesn't provide them.
-    public required init(channel: GRPCChannel, defaultCallOptions: CallOptions) {
-        self.channel = channel
-        self.defaultCallOptions = defaultCallOptions
-        
-        super.init()
-    }
-    
-}
+//class Client: GRPCEngine {
+//
+//    var client: GRPCClient
+//
+//    var isUAT: Bool { return false }
+//
+//    init() {
+//        self.client = C.init(channel: makeChannel(), defaultCallOptions: makeOptions())
+//    }
+//}
 
 autoreleasepool {
     let runLoop = RunLoop.current
     while (!shouldExit && (runLoop.run(mode: RunLoop.Mode.default, before: Date.distantFuture))) {}
-}
-
-
-func Get(payload) {
-//    grpc.req()
-    
-    service = usermsgcenter.Echo
-    
-    let client = grpc.makeClient("usermsgcenter.Echo")
-
-    client.makeUnryCall(payload).wait()
 }
 
 
