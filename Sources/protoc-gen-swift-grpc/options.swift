@@ -51,12 +51,12 @@ final class GeneratorOptions {
     }
   }
 
-  private(set) var visibility = Visibility.internal
-  private(set) var generateServer = true
+  private(set) var visibility = Visibility.public
+  private(set) var generateServer = false
   private(set) var generateClient = true
   private(set) var generateTestClient = false
   private(set) var protoToModuleMappings = ProtoFileToModuleMappings()
-  private(set) var fileNaming = FileNaming.FullPath
+  private(set) var fileNaming = FileNaming.PathToUnderscores
   private(set) var extraModuleImports: [String] = []
 
   init(parameter: String?) throws {

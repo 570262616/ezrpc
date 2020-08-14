@@ -27,8 +27,8 @@ build-kotlin:
 
 gen:
 
-	./Plugin/protoc ./Sources/Example/EchoModel/echo.proto --proto_path=./Sources/Example/ $(swift_plugins) $(options) $(swift_out)
-	./Plugin/protoc ./Sources/Example/EchoModel/common.proto --proto_path=./Sources/Example/ $(swift_plugins) $(options) $(swift_out)
+	./Plugin/protoc ./Sources/Example/EchoModel/echo.proto --proto_path=./Sources/Example/ $(swift_plugins) $(swift_out)
+	./Plugin/protoc ./Sources/Example/EchoModel/common.proto --proto_path=./Sources/Example/ $(swift_plugins) $(swift_out)
 	
 genkt:
 
