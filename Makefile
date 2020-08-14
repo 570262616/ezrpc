@@ -3,10 +3,7 @@
 swift_plugins=--plugin=./Plugin/protoc-gen-swift-grpc --plugin=./Plugin/protoc-gen-swift
 kt_plugins=--plugin=./Plugin/protoc-gen-kotlin-grpc
 
-options=--swift-grpc_opt=Visibility=Public \
---swift-grpc_opt=Client=true,Server=false \
---swift_opt=Visibility=Public \
---swift-grpc_opt=FileNaming=PathToUnderscores \
+options=--swift_opt=Visibility=Public \
 --swift_opt=FileNaming=PathToUnderscores  \
 
 swift_out=--swift-grpc_out=./Sources/Example/EchoModel --swift_out=./Sources/Example/EchoModel
@@ -27,8 +24,8 @@ build-kotlin:
 
 gen:
 
-	./Plugin/protoc ./Sources/Example/EchoModel/echo.proto --proto_path=./Sources/Example/ $(swift_plugins) $(swift_out)
-	./Plugin/protoc ./Sources/Example/EchoModel/common.proto --proto_path=./Sources/Example/ $(swift_plugins) $(swift_out)
+	./Plugin/protoc ./Sources/Example/EchoModel/echo.proto --proto_path=./Sources/Example/ $(swift_plugins) $(options) $(swift_out)
+	./Plugin/protoc ./Sources/Example/EchoModel/common.proto --proto_path=./Sources/Example/ $(swift_plugins) $(options) $(swift_out)
 	
 genkt:
 
