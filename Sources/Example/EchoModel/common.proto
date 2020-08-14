@@ -7,10 +7,6 @@ option java_package = "com.daigou.sg.rpc.common";
 
 option java_outer_classname = "CommonClass";
 
-//message ResultResp {
-//    string res = 1;
-//}
-
 message Empty {
     string i = 1;
 }

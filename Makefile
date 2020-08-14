@@ -1,6 +1,6 @@
 
 
-plugins=--plugin=./Plugin/protoc-gen-ktgrpc --plugin=./Plugin/protoc-gen-swift
+plugins=--plugin=./Plugin/protoc-gen-ezgrpc --plugin=./Plugin/protoc-gen-swift
 
 options=--ezgrpc_opt=Visibility=Public \
 --ezgrpc_opt=Client=true,Server=false \
@@ -29,6 +29,7 @@ build:
 gen:
 
 	./Plugin/protoc ./Sources/Example/EchoModel/echo.proto --proto_path=./Sources/Example/ $(plugins) $(options) $(out)
+	./Plugin/protoc ./Sources/Example/EchoModel/common.proto --proto_path=./Sources/Example/ $(plugins) $(options) $(out)
 	
 genkt:
 
