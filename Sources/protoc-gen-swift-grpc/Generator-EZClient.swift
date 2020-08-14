@@ -19,8 +19,8 @@ import SwiftProtobufPluginLibrary
 
 extension Generator {
   internal func printEZClient() {
-    println()
-    printServiceClientImplementation()
+    self.println()
+    self.printServiceClientImplementation()
   }
     
   private func printServiceClientImplementation() {

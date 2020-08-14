@@ -108,7 +108,7 @@ class Generator {
     // client or the test client.
     for service in file.services {
       self.service = service
-      self.printClient()
+      self.printEZClient()
     }
     println()
   }
