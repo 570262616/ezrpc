@@ -10,6 +10,9 @@ let package = Package(
       .macOS(.v10_15),
     ],
     products: [
+//        .executable(
+//            name: "ezrpc",
+//            targets: ["ezrpc"]),
         .executable(
             name: "protoc-gen-swift-grpc",
             targets: ["protoc-gen-swift-grpc"]),
@@ -25,6 +28,12 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+//        .target(
+//            name: "ezrpc",
+//            dependencies: [
+//            ],
+//            path: "Sources/ezrpc"
+//        ),
         .target(
             name: "protoc-gen-swift-grpc",
             dependencies: [
